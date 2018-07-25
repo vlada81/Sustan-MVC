@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Sustan.Models.Building>
+
+@{
+    ViewBag.Title = "Zgrade";
+}
+
+@Html.Partial("_AdminPageTitle")
+
+<section>
+    <div class="container">
+        <div class="row">
+            <br />
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <div class="my-btn-add">
+                    @Html.Partial("_CreateButtonPartial")
+                </div>
+                <table id="building" class="table table-bordered table-hover table-striped table-responsive table">
+                    <thead>
+                        <tr class="bg-primary">
+                            <th>
+                                @Html.DisplayNameFor(model => model.JIBZ)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Street)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Number)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Entrance)
+                            </th>
+                            <th class="hidden-md hidden-sm hidden-xs">
+                                @Html.DisplayNameFor(model => model.Pib)
+                            </th>
+                            <th class="hidden-md hidden-sm hidden-xs">
+                                @Html.DisplayNameFor(model => model.BuildingRegistrationNumber)
+                            </th>
+                            <th class="hidden-sm hidden-xs">
+                                @Html.DisplayNameFor(model => model.AccountNumber)
+                            </th>
+                            <th class="hidden-sm hidden-xs">
+                                @Html.DisplayNameFor(model => model.AccountBalance)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.JIBZ)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Street)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Number)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Entrance)
+                            </td>
+                            <td class="hidden-md hidden-sm hidden-xs">
+                                @Html.DisplayFor(modelItem => item.Pib)
+                            </td>
+                            <td class="hidden-md hidden-sm hidden-xs">
+                                @Html.DisplayFor(modelItem => item.BuildingRegistrationNumber)
+                            </td>
+                            <td class="hidden-sm hidden-xs">
+                                @Html.DisplayFor(modelItem => item.AccountNumber)
+                            </td>
+                            <td class="hidden-sm hidden-xs">
+                                @Html.DisplayFor(modelItem => item.AccountBalance)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Delete")/@item.Id" title="Brisanje" class="btn btn-sm btn-danger glyphicon glyphicon-trash pull-right"></a>
+                                <span class="pull-right ">&nbsp;</span>
+                                <a href="@Url.Action("Details")/@item.Id" title="Detalji" class="btn btn-sm btn-primary glyphicon glyphicon-list pull-right"></a>
+                                <span class="pull-right">&nbsp;</span>
+                                <a href="@Url.Action("Edit")/@item.Id" title="Izmena" class="btn btn-sm btn-success glyphicon glyphicon-pencil pull-right"></a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            }
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#building").DataTable({
+                "language": {
+                    "sProcessing": "Procesiranje u toku...",
+                    "sLengthMenu": "Prikaži _MENU_ elemenata",
+                    "sZeroRecords": "Nije pronađen nijedan rezultat",
+                    "sInfo": "Prikaz _START_ do _END_ od ukupno _TOTAL_ elemenata",
+                    "sInfoEmpty": "Prikaz 0 do 0 od ukupno 0 elemenata",
+                    "sInfoFiltered": "(filtrirano od ukupno _MAX_ elemenata)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Pretraga:",
+                    "sUrl": "",
+                    "oPaginate": {
+                        "sFirst": "Početna",
+                        "sPrevious": "Prethodna",
+                        "sNext": "Sledeća",
+                        "sLast": "Poslednja"
+                    }
+                }
+            });
+        })
+    </script>
+}

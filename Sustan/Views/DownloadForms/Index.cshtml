@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Obrasci";
+}
+
+@Html.Partial("_PageTitle")
+
+<!-- Services Details -->
+<section class="flat-row services-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="item-wrap text-justify">
+                    <div class="item item-details">
+                        <div class="content-item">
+                            <h2 class="title-item">Ovde možete preuzeti sledeće obrasce:</h2>
+                            <br />
+                            <ul class="title-item">
+                                <li><i class="fa fa-download">&nbsp;</i><a href="#">Izjava za promenu podataka o stanu</a></li>
+                                <li><i class="fa fa-download">&nbsp;</i><a href="#">Molba za izdavanje listinga</a></li>
+                                <li><i class="fa fa-download">&nbsp;</i><a href="#">Molba za promenu dostavne adrese</a></li>
+                                <li><i class="fa fa-download">&nbsp;</i><a href="#">Molba za promenu imena</a></li>
+                                <li><i class="fa fa-download">&nbsp;</i><a href="#">Potrošnja hladne vode – samočitači</a></li>
+                                <li><i class="fa fa-download">&nbsp;</i><a href="#">Potvrda o broju članova domaćinstva pojedinačno</a></li>
+                                <li><i class="fa fa-download">&nbsp;</i><a href="#">Potvrda o broju članova domaćinstva zgrada</a></li>
+                            </ul>
+                        </div><!-- /.content-item -->
+                    </div><!-- /.item -->
+                </div><!-- /.item-wrap -->
+            </div><!-- /.Col-lg-9 -->
+            <!-- Sidebar -->
+            @Html.Partial("_Sidebar")
+
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</section>

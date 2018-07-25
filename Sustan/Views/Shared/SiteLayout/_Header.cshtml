@@ -1,0 +1,80 @@
+﻿@using Microsoft.AspNet.Identity
+@using Sustan.Extensions
+@using Sustan.Models
+
+<!-- Header -->
+<div class="header widget-header clearfix">
+    <div class="container">
+        <div class="header-wrap clearfix">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div id="logo" class="logo">
+                        <a href="/" rel="home">
+                            <img src="~/images/Logo_SU.png" alt="image">
+                        </a>
+                    </div><!-- /.logo -->
+
+                </div>
+                <div class="col-lg-9">
+                    <div class="wrap-widget-header clearfix">
+                        <aside class="widget widget-info">
+                            <div class="btn-click">
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        <ul class="nav navbar-nav navbar-right">
+                                            <li>
+                                                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                                                {
+                                                    @Html.ActionLink("Zdravo " + User.Identity.GetUserFirstName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                                }
+                                                else
+                                                {
+                                                    @Html.Label("Zdravo " + User.Identity.GetUserFirstName() + "!", new { @class = "welcome-name" });
+                                                }
+                                            </li>
+                                            <li><a class="flat-button" href="javascript:document.getElementById('logoutForm').submit()">Odjava</a></li>
+                                        </ul>
+                                    }
+                                }
+                                else
+                                {
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li>@Html.ActionLink("Prijava", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "flat-button" })</li>
+                                    </ul>
+                                }
+
+                            </div>
+                        </aside>
+                        <aside class="widget widget-info">
+                            <div class="textwidget clearfix">
+                                <div class="info-icon">
+                                    <i class="fa fa-map-marker"></i>
+                                </div>
+                                <div class="info-text">
+                                    <h6>Braće Radić 12c</h6>
+                                    <p>24000 Subotica</p>
+                                </div>
+                            </div>
+                        </aside>
+                        <aside class="widget widget-info">
+                            <div class="textwidget clearfix">
+                                <div class="info-icon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <div class="info-text">
+                                    <a href="tel:+381693939390"><h6>069/39 39 390</h6></a>
+                                    <a href="mailto:info@sustan.rs"><p>info@sustan.rs</p></a>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div><!-- /.row -->
+        </div><!-- /.header-wrap -->
+
+    </div>
+</div><!-- /.header -->

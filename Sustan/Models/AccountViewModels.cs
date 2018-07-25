@@ -48,17 +48,17 @@ namespace Sustan.Models
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Molim Vas unesite email adresu.")]
         [Display(Name = "Email")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Format email adrese nije ispravan.")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Molim Vas unesite lozinku.")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Lozinka")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Zapamti me?")]
         public bool RememberMe { get; set; }
     }
 
@@ -79,6 +79,14 @@ namespace Sustan.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Ime korisnika")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Prezime korisnika")]
+        public string LastName { get; set; }
     }
 
     public class ResetPasswordViewModel

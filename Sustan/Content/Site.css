@@ -1,12 +1,13 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    height: 100%;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    position: relative;
+    min-height: 380px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -20,5 +21,138 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 380px;
+}
+
+
+.navbar-brand {
+    padding: 0 15px;
+}
+
+.btn-primary {
+    background-color: #fd7c0f;
+    border-color: #fd7c0f;
+}
+
+    .btn-primary:hover, .btn-primary:active:hover, .btn-primary:focus, .btn-primary:active {
+        background-color: #ef6f04;
+        border-color: #fd7c0f;
+    }
+
+.bg-primary {
+    background-color: #fd7c0f;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav {
+        font-size: 15px;
+        padding-left: 20px
+    }
+}
+
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: auto;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.section-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #eee;
+}
+
+.page-title {
+    padding: 41px 0 44px;
+    margin-bottom: 30px;
+}
+
+.footer {
+    background-color: #252a2d;
+    padding: 40px 0 40px;
+    color: #e3e6e8;
+    font-size: 14px;
+    margin-top: 50px;
+}
+
+.my-btn-add {
+    margin-bottom: 50px;
+}
+
+.dataTables_length select, input[type="search"] {
+    margin-bottom: 0;
+}
+
+.flat-row {
+    clear: both;
+    display: block;
+    position: relative;
+    padding: 40px 0;
+}
+
+.accordian-border {
+    border: solid 1px;
+    border-color: #f0f0f0;
+    padding: 10px 10px 0 10px;
+    margin-bottom: 5px;
+    background-color: #f8f8f8;
+}
+
+    .accordian-border:hover {
+        background-color: #f0f0f0;
+    }
+
+.accordian-h5-bottom {
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 10px !important;
+}
+
+.flat-row.section-iconbox {
+    padding: 63px 0 20px;
+}
+
+.flat-row.v4 {
+    padding: 73px 0 46px;
+}
+
+.welcome-name {
+    margin: 12px 15px 0 0;
+}
+
+.tp-caption .flat-button {
+    text-align: center;
+}
+
+.flat-input input {
+    max-width: 500px;
+}
+
+
+.flat-input textarea {
+    max-width: 500px;
+}
+
+.breadcrumbs ul li i {
+    margin-right: 5px;
+}
+
+.card-body {
+    padding: 10px 10px 0 10px;
+}
+
+.my-list-style {
+    list-style: disc;
+    padding-left: 30px;
+}
+
+.form-error-text {
+    color: red;
 }

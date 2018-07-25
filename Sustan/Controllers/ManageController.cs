@@ -10,7 +10,7 @@ using Sustan.Models;
 
 namespace Sustan.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

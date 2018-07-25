@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="Početna" controller="Home" action="Index">
+    <mvcSiteMapNode title="O nama" controller="About" action="Index"/>
+    
+    <mvcSiteMapNode title="Naše usluge" controller="Services" action="Index" clickable="false">
+      <mvcSiteMapNode title="Upravljanje zgradama" controller="Services" action="UpravljanjeZgradama"/>
+      <mvcSiteMapNode title="Održavanje zgrada" controller="Services" action="OdrzavanjeZgrada"/>
+      <mvcSiteMapNode title="Knjiženje zgrada" controller="Services" action="KnjizenjeZgrada"/>
+    </mvcSiteMapNode>
+    
+    <mvcSiteMapNode title="Obrasci" controller="DownloadForms" action="Index"/>
+    <mvcSiteMapNode title="Česta pitanja" controller="Faq" action="Index"/>
+    <mvcSiteMapNode title="Kontakt" controller="Contact" action="Index"/>
+    
+    <mvcSiteMapNode title="Zgrade" controller="Buildings" action="Index" >
+      <mvcSiteMapNode title="Dodaj zgradu" controller="Buildings" action="Create"/>
+      <mvcSiteMapNode title="Izmena" controller="Buildings" action="Edit"/>
+      <mvcSiteMapNode title="Detalji" controller="Buildings" action="Details"/>
+      <mvcSiteMapNode title="Brisanje" controller="Buildings" action="Delete"/>
+    </mvcSiteMapNode>
+    
+    <mvcSiteMapNode title="Stanovi" controller="Apartments" action="Index">
+      <mvcSiteMapNode title="Dodaj stan" controller="Apartments" action="Create"/>
+      <mvcSiteMapNode title="Izmena" controller="Apartments" action="Edit"/>
+      <mvcSiteMapNode title="Detalji" controller="Apartments" action="Details"/>
+      <mvcSiteMapNode title="Brisanje" controller="Apartments" action="Delete"/>
+      <mvcSiteMapNode title="Podaci" controller="Apartments" action="List"/>
+    </mvcSiteMapNode>
+    
+    <mvcSiteMapNode title="Korisnici" controller="Account" action="Index">
+      <mvcSiteMapNode title="Korisnici" controller="Account" action="Create"/>
+      <mvcSiteMapNode title="Izmena" controller="Account" action="Edit"/>
+      <mvcSiteMapNode title="Izmena" controller="Account" action="Delete"/>
+    </mvcSiteMapNode>
+  </mvcSiteMapNode>
+
+</mvcSiteMap>

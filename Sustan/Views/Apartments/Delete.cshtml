@@ -1,0 +1,78 @@
+﻿@model Sustan.Models.Apartment
+
+@{
+    ViewBag.Title = "Brisanje";
+}
+
+@Html.Partial("_AdminPageTitle")
+
+<section>
+    <div class="container">
+        <div class="row">
+            <h3>Da li sigurno želite da obrišete stan?</h3>
+            <div>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Building.JIBZ)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Building.JIBZ)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.JIBS)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.JIBS)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ApartmentNumber)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ApartmentNumber)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ApartmentArea)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ApartmentArea)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NumberOfTenants)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.NumberOfTenants)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CostOfService)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CostOfService)
+                    </dd>
+
+                </dl>
+                <br />
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-default" })
+                        <input type="submit" value="Obriši" class="btn btn-primary" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

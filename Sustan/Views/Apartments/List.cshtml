@@ -1,0 +1,216 @@
+﻿@model Sustan.ViewModels.ApartmentBuildingViewModel
+
+@{
+    ViewBag.Title = "Moji podaci";
+}
+
+@Html.Partial("_AdminPageTitle")
+
+<section class="flat-row services-details">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model.Apartments)
+            {
+                <div class="col-md-6">
+                    @if (item.Building.Apartments.Count() != 1)
+                    {
+                        break;
+                    }
+                    else
+                    {
+
+                        <h4>Zgrada: @Html.DisplayFor(modelItem => item.Building.Street) @Html.DisplayFor(modelItem => item.Building.Number)</h4>
+                        <div class="img-responsive">
+                            <img class="img-thumbnail" src="@item.Building.ImageUrl" width="450" />
+                        </div>
+                        <br />
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Building.JIBZ):
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Building.JIBZ)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Building.Street):
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Building.Street)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Building.Number):
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Building.Number)
+                            </dd>
+
+                            @if (item.Building.Entrance != null)
+                            {
+                                <dt>
+                                    @Html.DisplayNameFor(modelItem => item.Building.Entrance):
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(modelItem => item.Building.Entrance)
+                                </dd>
+                            }
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Building.NumberOfFloors):
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Building.NumberOfFloors)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Building.AccountNumber):
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Building.AccountNumber)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Building.BuildingRegistrationNumber):
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Building.BuildingRegistrationNumber)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Building.Pib):
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Building.Pib)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Building.ParcelNumber):
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Building.ParcelNumber)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Building.BuildingArea):
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Building.BuildingArea)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Building.BuildingManager):
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Building.BuildingManager)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(modelItem => item.Building.AccountBalance):
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(modelItem => item.Building.AccountBalance)
+                            </dd>
+                        </dl>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+    <br />
+    <div class="container">
+        <div class="row">
+            <h2>Podaci stana</h2>
+            <br />
+
+            <table id="userApartment" class="table table-bordered table-hover table-striped table-responsive">
+                <thead>
+                    <tr class="bg-primary">
+                        <th>
+                            <label title="Jedinstveni identifikacioni broj zgrade">JIBZ</label>
+                        </th>
+                        <th>
+                            <label title="Jedinstveni identifikacioni broj stana">JIBS</label>
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Apartment.ApartmentNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Apartment.ApartmentArea)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Apartment.NumberOfTenants)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Apartment.CostOfService)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.Apartment.User.Email)
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model.Apartments)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Building.JIBZ)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JIBS)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ApartmentNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ApartmentArea)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfTenants)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CostOfService)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Email)
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#userApartment").DataTable({
+                "language": {
+                    "sProcessing": "Procesiranje u toku...",
+                    "sLengthMenu": "Prikaži _MENU_ elemenata",
+                    "sZeroRecords": "Nije pronađen nijedan rezultat",
+                    "sInfo": "Prikaz _START_ do _END_ od ukupno _TOTAL_ elemenata",
+                    "sInfoEmpty": "Prikaz 0 do 0 od ukupno 0 elemenata",
+                    "sInfoFiltered": "(filtrirano od ukupno _MAX_ elemenata)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Pretraga:",
+                    "sUrl": "",
+                    "oPaginate": {
+                        "sFirst": "Početna",
+                        "sPrevious": "Prethodna",
+                        "sNext": "Sledeća",
+                        "sLast": "Poslednja"
+                    }
+                }
+            });
+        })
+    </script>
+}

@@ -1,0 +1,136 @@
+﻿@model Sustan.Models.Building
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@Html.Partial("_AdminPageTitle")
+
+<section>
+    <div class="container">
+        <div class="row">
+            <h4>Zgrada @Html.DisplayFor(model => model.JIBZ)</h4>
+            <hr />
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.JIBZ)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.JIBZ)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Street)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Street)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Number)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Number)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Entrance)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Entrance)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NumberOfFloors)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.NumberOfFloors)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Pib)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Pib)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BuildingRegistrationNumber)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.BuildingRegistrationNumber)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AccountNumber)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AccountNumber)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AccountBalance)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AccountBalance)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ParcelNumber)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ParcelNumber)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BuildingArea)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.BuildingArea)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BuildingManager)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.BuildingManager)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ImageUrl)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ImageUrl)
+                    </dd>
+
+                </dl>
+            </div>
+            <div class="col-md-6">
+                @if (Model.ImageUrl != null)
+                {
+                    <img class="img-thumbnail" src="@Url.Content(Model.ImageUrl)" width="450" />
+                }
+            </div>
+        </div>
+
+        <br />
+        <div>
+            @Html.ActionLink("Izmeni", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+</section>

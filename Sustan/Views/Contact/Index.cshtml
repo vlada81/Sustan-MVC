@@ -1,0 +1,175 @@
+﻿@model Sustan.Models.Contact
+
+@{
+    ViewBag.Title = "Kontakt";
+}
+
+@Html.Partial("_PageTitle")
+
+<section class="flat-row page-contact">
+    <div class="container">
+        <div class="wrap-infobox">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="flat-maps box-shadow3 margin-bottom-73">
+                        <div class="maps2" style="width: 100%; height: 550px; ">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2133.3700223755172!2d19.66646768186761!3d46.098177858530406!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x268c7434e7d584c7!2sSU-STAN+SISTEMI+DOO+SUBOTICA!5e0!3m2!1sen!2srs!4v1528379328556" width="100%" height="550" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div>
+                    <h2>Kontakt forma</h2>
+                    <hr />
+                </div>
+                @using (Html.BeginForm("Index", "Contact", FormMethod.Post, new { @id = "contactForm" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FullName, new { @class = "control-label" })
+                        <div>
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @id = "fullNameId", autocomplete = "FullName" })
+                            @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                        <div>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "emailId", autocomplete = "Email" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
+                        <div>
+                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @id = "phoneNumber", autocomplete = "PhoneNumber" })
+                            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Message, new { @class = "control-label" })
+                        <div>
+                            @Html.TextAreaFor(m => m.Message, 10, 60, new { @class = "form-control", @id = "messageId", autocomplete = "Message" })
+                            @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-9 col-md-offset-3">
+                            <div id="messages"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <input type="submit" class="btn btn-default" value="Pošalji" />
+                        </div>
+                    </div>
+
+                    //Modal poruka nakon slanja emaila
+                    <div id="messageModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Sustan</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Vaša poruka je uspešno poslata.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-lg-6">
+                <div>
+                    <h2>Kontakt podaci</h2>
+                    <hr />
+                </div>
+                <div class="info-box">
+                    <h3>Poslovnica</h3>
+                    <ul>
+                        <li>Braće Radić 12c, 24000 Subotica</li>
+                        <li><a href="mailto:info@sustan.rs">info@sustan.rs</a></li>
+                        <li><a href="tel:+381693939390">069 39 39 390</a></li>
+                    </ul>
+                </div>
+                <br />
+                <div class="info-box">
+                    <h3>Kancelarija</h3>
+                    <ul>
+                        <li>Đorđa Natoševića 30, 24000 Subotica</li>
+                        <li><a href="mailto:info@sustan.rs">info@sustan.rs</a></li>
+                        <li><a href="tel:+381693939390">069 39 39 390</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+
+            $("#contactForm").validate({
+                errorClass: 'text-danger animation-slideDown',
+                
+                rules: {
+                    'FullName': {
+                        required: true,
+                        maxlength: 100
+                    },
+                    'Email': {
+                        required: true,
+                        email: true
+                    },
+                    'PhoneNumber': {
+                        maxlength: 50
+                    },
+                    'Message': {
+                        required: true,
+                        maxlength: 1000
+                    }
+                },
+                messages: {
+                    'FullName': {
+                        required: "Molim Vas unesite Vaše ime i prezime.",
+                        maxlength: "Ime i prezime ne može biti duže od 100 karaktera."
+                    },
+                    'Email': {
+                        required: "Molim Vas unesite email adresu.",
+                        email: "Format email adrese nije ispravan, molim Vas pokušajte ponovo."
+                    },
+                    'PhoneNumber': {
+                        maxlength: "Broj telefona ne može biti duži od 50 karaktera!"
+                    },
+                    'Message': {
+                        required: "Molim Vas unesite tekst vaše poruke.",
+                        maxlength: "Poruka ne može biti duža od 1000 karaktera."
+                    }
+                }
+                
+            });
+
+            //$("#contactForm").on('submit', function (e) {
+            //    $("#messageModal").modal('show');
+            //    e.preventDefault();
+            //});
+            
+
+
+
+        });
+
+    </script>
+}

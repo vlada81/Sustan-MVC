@@ -1,0 +1,93 @@
+﻿@using Microsoft.AspNet.Identity
+@using Sustan.Extensions
+@using Sustan.Models
+
+<header id="header" class="header header-classic header-style1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="flat-wrap-header">
+                    <div class="nav-wrap clearfix">
+                        <nav id="mainnav" class="mainnav">
+                            <ul class="menu">
+                                <li>
+                                    <a href="/">Početna</a>
+                                </li>
+                                <li>@Html.ActionLink("O nama", "Index", "About")</li>
+                                <li>
+                                    <a href="#">Naše usluge <i class="fa fa-angle-down"></i></a>
+                                    <ul class="submenu">
+                                        <li>@Html.ActionLink("Upravljanje zgradama", "UpravljanjeZgradama", "Services")</li>
+                                        <li>@Html.ActionLink("Održavanje zgrada", "OdrzavanjeZgrada", "Services")</li>
+                                        <li>@Html.ActionLink("Knjiženje zgrada", "KnjizenjeZgrada", "Services")</li>
+                                    </ul><!-- /.submenu -->
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Obrasci", "Index", "DownloadForms")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Česta pitanja", "Index", "Faq")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Kontakt", "Index", "Contact")
+                                </li>
+                                @Html.Partial("_AdminMenuPartial")
+                                @Html.Partial("_UserMenuPartial")
+                                <li>
+                                    <div class="btn-click mobile-menu-login-btn">
+                                        @if (Request.IsAuthenticated)
+                                        {
+                                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+
+                                                <ul class="nav navbar-nav navbar-right">
+                                                    <li>
+                                                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                                                        {
+                                                            @Html.ActionLink("Zdravo " + User.Identity.GetUserFirstName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.Label("Zdravo " + User.Identity.GetUserFirstName() + "!", new { @class = "welcome-name" });
+                                                        }
+                                                    </li>
+                                                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Odjava</a></li>
+                                                </ul>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <ul class="nav navbar-nav navbar-right">
+                                                <li>@Html.ActionLink("Prijava", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                                            </ul>
+                                        }
+
+                                    </div>
+                                </li>
+                            </ul><!-- /.menu -->
+                        </nav><!-- /.mainnav -->
+                        @*<div class="top-search">
+                                <form action="#" id="searchform-all" method="get">
+                                    <div>
+                                        <input type="text" id="input-search" class="sss" placeholder="Pretraga...">
+                                        <input type="submit" id="searchsubmit">
+                                    </div>
+                                </form>
+                            </div>
+                            <ul class="menu menu-extra">
+                                <li id="s" class="show-search">
+                                    <a href="#search" class="flat-search"><i class="fa fa-search"></i></a>
+                                </li>
+                            </ul>*@
+                        <div class="btn-menu">
+                            <span></span>
+                        </div><!-- //mobile menu button -->
+                    </div><!-- /.nav-wrap -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+

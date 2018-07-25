@@ -1,0 +1,14 @@
+﻿@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <li class="dropdown active" data-admin-menu>
+        <a href="#">
+            Admin
+            <i class="fa fa-angle-down"></i>
+        </a>
+        <ul class="submenu" role="menu">
+            <li><a href="/Zgrade">Zgrade</a></li>
+            <li><a href="/Stanovi">Stanovi</a></li>
+            <li><a href="/Korisnici">Korisnici</a></li>
+        </ul>
+    </li>
+}

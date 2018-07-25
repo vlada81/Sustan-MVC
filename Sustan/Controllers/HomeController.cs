@@ -26,5 +26,11 @@ namespace Sustan.Controllers
 
             return View();
         }
+
+        [Route("zasto-da-angazujemo-profesionalnog-upravnika")]
+        public ActionResult Info()
+        {
+            return View();
+        }
     }
 }
