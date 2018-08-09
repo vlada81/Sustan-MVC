@@ -5807,9 +5807,13 @@ tp-caption.Team-Thumb,
 
 /* Style text */
 /* Title */
-.tp-caption.title-slide {	
-	color: #0f3661;
-	font-family: "Work Sans", sans-serif;
+.tp-caption.title-slide {
+    color: #0f3661;
+    font-family: "Work Sans", sans-serif;
+    z-index: 16;
+    white-space: nowrap;
+    color: white;
+    text-shadow: 0px 2px 5px rgba(0,0,0,0.5);
 }
 
 .tp-caption.title-slide span {

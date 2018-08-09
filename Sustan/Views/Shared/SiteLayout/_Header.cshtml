@@ -10,7 +10,7 @@
                 <div class="col-lg-3">
                     <div id="logo" class="logo">
                         <a href="/" rel="home">
-                            <img src="~/images/Logo_SU.png" alt="image">
+                            <img src="/images/Logo_SU.png" alt="image">
                         </a>
                     </div><!-- /.logo -->
 
@@ -29,7 +29,7 @@
                                             <li>
                                                 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                                                 {
-                                                    @Html.ActionLink("Zdravo " + User.Identity.GetUserFirstName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                                    @Html.Label("Zdravo " + User.Identity.GetUserFirstName() + "!", new { @class = "welcome-name" });
                                                 }
                                                 else
                                                 {

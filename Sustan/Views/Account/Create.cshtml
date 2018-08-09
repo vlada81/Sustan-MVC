@@ -9,58 +9,124 @@
 <section>
     <div class="container">
         <div class="row">
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
+            <div class="col-sm-12">
+                @using (Html.BeginForm("Create", "Account", FormMethod.Post, new { @id = "createForm" }))
+                {
+                    @Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", autocomplete = "first-name" } })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", autocomplete = "last-name" } })
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", autocomplete = "email" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", autocomplete = "current-password" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Dodaj" class="btn btn-primary" />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Dodaj" class="btn btn-primary" />
+                            </div>
                         </div>
                     </div>
+                }
+
+                <div>
+                    @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-default" })
                 </div>
-            }
-
-            <div>
-                @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-default" })
             </div>
         </div>
     </div>
 </section>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/Scripts/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+
+            jQuery.validator.addMethod(
+                "regex",
+                function (value, element, regexp) {
+                    if (regexp.constructor != RegExp)
+                        regexp = new RegExp(regexp);
+                    else if (regexp.global)
+                        regexp.lastIndex = 0;
+                    return this.optional(element) || regexp.test(value);
+                }, "Pogrešan format zapisa!"
+            );
+
+            $("#createForm").validate({
+                errorClass: 'text-danger animation-slideDown',
+
+                rules: {
+                    'FirstName': {
+                        required: true,
+                        regex: /[A-Za-z\s\u0100-\u017F]+$/
+                    },
+                    'LastName': {
+                        required: true,
+                        regex: /[A-Za-z\s\u0100-\u017F]+$/
+                    },
+                    'Email': {
+                        required: true,
+                        email: true
+                    },
+                    'Password': {
+                        required: true,
+                        minlength: 6,
+
+                    }
+
+                },
+                messages: {
+                    'FirstName': {
+                        required: "Molim Vas unesite ime korisnika!",
+                        regex: "Ime korisnika može sadržati samo slova"
+                    },
+                    'LastName': {
+                        required: "Molim Vas unesite prezime korisnika!",
+                        regex: "Prezime korisnika može sadržati samo slova"
+                    },
+                    'Email': {
+                        required: "Molim Vas unesite email adresu korisnika.",
+                        email: "Format email adrese nije ispravan, molim Vas pokušajte ponovo."
+                    },
+                    'Password': {
+                        required: "Molim Vas unesite lozinku!",
+                        minlength: "Lozinka mora sadržati najmanje 6 karaktera.",
+
+                    }
+                }
+
+            });
+
+
+        });
+
+    </script>
 }

@@ -9,127 +9,277 @@
 <section>
     <div class="container">
         <div class="row">
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
+            <div class="col-sm-12">
+                @using (Html.BeginForm("Create", "Buildings", FormMethod.Post, new { @id = "createForm" }))
+                {
+                    @Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.JIBZ, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.JIBZ, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.JIBZ, "", new { @class = "text-danger" })
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.JIBZ, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.JIBZ, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.JIBZ, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control", autocomplete = "Street" } })
+                                @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control", autocomplete = "cc-number" } })
+                                @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Entrance, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Entrance, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Entrance, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NumberOfFloors, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.NumberOfFloors, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NumberOfFloors, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Pib, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Pib, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Pib, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BuildingRegistrationNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.BuildingRegistrationNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BuildingRegistrationNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AccountNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.AccountNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AccountBalance, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.AccountBalance, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AccountBalance, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ParcelNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ParcelNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ParcelNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BuildingArea, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.BuildingArea, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BuildingArea, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BuildingManager, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.BuildingManager, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BuildingManager, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @* IMAGE URL TEXT FIELD *@
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Dodaj" class="btn btn-primary" />
+                            </div>
                         </div>
                     </div>
+                }
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Entrance, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Entrance, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Entrance, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.NumberOfFloors, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.NumberOfFloors, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.NumberOfFloors, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Pib, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Pib, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Pib, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.BuildingRegistrationNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.BuildingRegistrationNumber, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.BuildingRegistrationNumber, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.AccountNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.AccountNumber, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.AccountBalance, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.AccountBalance, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.AccountBalance, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ParcelNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.ParcelNumber, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.ParcelNumber, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.BuildingArea, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.BuildingArea, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.BuildingArea, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.BuildingManager, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.BuildingManager, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.BuildingManager, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Dodaj" class="btn btn-primary" />
-                        </div>
-                    </div>
+                <div>
+                    @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-default" })
                 </div>
-            }
-
-            <div>
-                @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-default" })
             </div>
         </div>
     </div>
 </section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/Scripts/jqueryval")
+    <script>
+        $(document).ready(function () {
+
+            jQuery.validator.addMethod(
+                "regex",
+                function (value, element, regexp) {
+                    if (regexp.constructor != RegExp)
+                        regexp = new RegExp(regexp);
+                    else if (regexp.global)
+                        regexp.lastIndex = 0;
+                    return this.optional(element) || regexp.test(value);
+                }, "Pogrešan format zapisa!"
+            );
+
+            $("#createForm").validate({
+                errorClass: 'text-danger animation-slideDown',
+
+                rules: {
+                    'JIBZ': {
+                        required: true,
+                        regex: /\d{2,4}-\d{2,4}/
+                    },
+                    'Street': {
+                        required: true,
+                        regex: /[A-Za-z\s\u0100-\u017F]+$/,
+                        maxlength: 100
+                    },
+                    'Number': {
+                        required: true,
+                        range: [0, 1000]
+                    },
+                    'Entrance': {
+                        maxlength: 10
+                    },
+                    'NumberOfFloors': {
+                        required: true,
+                        range: [1, 100]
+                    },
+                    'Pib': {
+                        required: true,
+                        regex: /\d{9}/,
+                        maxlength: 9,
+                        number: true
+                    },
+                    'BuildingRegistrationNumber': {
+                        required: true,
+                        regex: /\d{8}/,
+                        maxlength: 8,
+                        number: true
+                    },
+                    'AccountNumber': {
+                        required: true,
+                        regex: /\d{3}-\d{13}-\d{2}/,
+                        maxlength: 20
+                    },
+                    'AccountBalance': {
+                        required: true,
+                        regex: /\d+(\.\d{1,2})?/,
+                        number: true
+                    },
+                    'ParcelNumber': {
+                        required: true,
+                        maxlength: 50
+                    },
+                    'BuildingArea': {
+                        required: true,
+                        regex: /\d+(\.\d{1,2})?/,
+                        range: [0.00, 10000000.00]
+                    },
+                    'BuildingManager': {
+                        required: true,
+                        maxlength: 100,
+                        regex: /[A-Za-z\s\u0100-\u017F]+$/
+                    },
+                    //'ImageUrl': {
+                    //    regex: /\d+(\.\d{1,2})?/,
+                    //    number: true
+                    //}
+                },
+                messages: {
+                    'JIBZ': {
+                        required: "Molim Vas unesite JIBZ!",
+                        regex: "JIBZ broj mora biti u formi 00-00 do 0000-0000"
+                    },
+                    'Street': {
+                        required: "Molim Vas unesite naziv ulice!",
+                        maxlength: "Naziv ulice ne moze biti duži od 100 karaktera!",
+                        regex: "Naziv ulice može sadržati samo slova"
+                    },
+                    'Number': {
+                        required: "Molim Vas unesite broj!",
+                        range: "Broj ne može biti manji od 0!"
+                    },
+                    'Entrance': {
+                        maxlength: "Naziv ulaza ne može biti duži od 10 karaktera!"
+                    },
+                    'NumberOfFloors': {
+                        required: "Molim Vas unesite spratnost zgrade!",
+                        range: "Spratnost mora biti između 1 i 100!"
+                    },
+                    'Pib': {
+                        required: "Molim Vas unesite PIB zgrade!",
+                        regex: "PIB mora sadržati 9 cifara!",
+                        maxlength: "PIB mora sadržati 9 cifara!"
+                    },
+                    'BuildingRegistrationNumber': {
+                        required: "Molim Vas unesite Matični broj zgrade!",
+                        regex: "Matični broj mora sadržati 8 cifara!",
+                        maxlength: "Matični broj mora sadržati 8 cifara!"
+                    },
+                    'AccountNumber': {
+                        required: "Molim Vas unesite broj žiro računa zgrade!",
+                        regex: "Broj računa mora biti u formi 000-0000000000000-00",
+                        maxlength: "Broj računa mora biti u formi 000-0000000000000-00"
+                    },
+                    'AccountBalance': {
+                        required: "Molim Vas unesite trenutno stanje žiro računa zgrade!",
+                        regex: "Za decimalni zapis koristite tačku."
+                    },
+                    'ParcelNumber': {
+                        required: "Molim Vas unesite broj parcele zgrade!",
+                        maxlength: "Broj parcele ne može biti duži od 50 karaktera!"
+                    },
+                    'BuildingArea': {
+                        required: "Molim Vas unesite površinu zgrade u osnovi!",
+                        regex: "Za decimalni zapis koristite tačku.",
+                        range: "Površina ne može biti manja od 0!"
+                    },
+                    'BuildingManager': {
+                        required: "Molim Vas unesite upravnika zgrade!",
+                        maxlength: "Ime i prezime upravnika zgrade ne može biti duže od 100 karaktera.",
+                        regex: "Ime i prezime upravnika može sadržati samo slova."
+                    }
+                    //'ImageUrl': {
+                    //    regex: /\d+(\.\d{1,2})?/,
+                    //    number: true
+                    //}
+                }
+            });
+
+        });
+
+    </script>
+}

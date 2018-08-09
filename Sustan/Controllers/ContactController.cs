@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Sustan.Controllers
 {
+    [RequireHttps]
     [RoutePrefix("Kontakt")]
     public class ContactController : Controller
     {
@@ -28,10 +29,10 @@ namespace Sustan.Controllers
         {
             if (ModelState.IsValid)
             {
-                var body = "<p>-- Ova poruka je poslata preko kontakt forme sa sajta Sustan (http://sustan.rs) --</p><br /><p><strong>Od:</strong> {0} ({1})</p><p><strong>Broj telefona:</strong> {2}</p><p><strong>Poruka:</strong></p><p>{3}</p>";
+                var body = "<p>-- Ova poruka je poslata preko kontakt forme sa sajta Sustan (https://sustan.rs) --</p><br /><p><strong>Od:</strong> {0} ({1})</p><p><strong>Broj telefona:</strong> {2}</p><p><strong>Poruka:</strong></p><p>{3}</p>";
                 var message = new MailMessage();
-                message.To.Add(new MailAddress("toster.lampa@gmail.com"));
-                message.Subject = "[Kontakt forma - Sustan]";
+                message.To.Add(new MailAddress("prijave@sustan.rs"));
+                message.Subject = "[Kontakt forma] - Sustan";
                 message.Body = string.Format(body, form.FullName, form.Email, form.PhoneNumber, form.Message);
                 message.IsBodyHtml = true;
                 using (var smtp = new SmtpClient())

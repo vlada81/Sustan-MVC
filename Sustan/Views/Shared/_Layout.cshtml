@@ -1,9 +1,19 @@
 ﻿<!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="sr-SP-Latn" lang="sr-SP-Latn">
 <!--<![endif]-->
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123649837-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-123649837-1');
+    </script>
+
     <!-- Basic Page Needs -->
     <meta charset="utf-8">
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
@@ -14,7 +24,17 @@
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    @Styles.Render("~/css")
+    <link href="/content/bootstrap.css" rel="stylesheet" />
+    <link href="/content/datatables/css/datatables.bootstrap.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/colors/color4.css" rel="stylesheet" />
+    <link href="/css/headline.css" rel="stylesheet" />
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <link href="/css/animate.css" rel="stylesheet" />
+    <link href="/Content/site.css" rel="stylesheet" />
+    <link href="/Content/revolution/css/layers.css" rel="stylesheet" />
+    <link href="/Content/revolution/css/settings.css" rel="stylesheet" />
+
     @Scripts.Render("~/bundles/modernizr")
 
     <link href="/images/icon/favicon.png" rel="icon">
@@ -54,11 +74,11 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/theme/scripts")
     <!-- Revolution Slider -->
-    @Scripts.Render("~/bundles/slider")
+    @Scripts.Render("~/bundles/sliders")
     <!-- SLIDER REVOLUTION 5.0 EXTENSIONS  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
     @Scripts.Render("~/bundles/slider/extensions")
 
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstraps")
     @RenderSection("scripts", required: false)
 </body>
 </html>

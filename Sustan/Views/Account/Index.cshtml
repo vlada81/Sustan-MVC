@@ -9,56 +9,58 @@
 <section>
     <div class="container">
         <div class="row">
-            <br />
-            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-            {
-                <div class="my-btn-add">
-                    @Html.Partial("_CreateButtonPartial")
-                </div>
-                <table id="users" class="table table-bordered table-hover table-striped table-responsive">
-                    <thead>
-                        <tr class="bg-primary">
-                            <th>
-                                @Html.DisplayNameFor(model => model.Email)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.FirstName)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.LastName)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.RegistrationDate)
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
+            <div class="col-sm-12">
+                <br />
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <div class="my-btn-add">
+                        @Html.Partial("_CreateButtonPartial")
+                    </div>
+                    <table id="users" class="table table-bordered table-hover table-striped table-responsive">
+                        <thead>
+                            <tr class="bg-primary">
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LastName)
+                                </th>
+                                <th class="hidden-md hidden-sm hidden-xs">
+                                    @Html.DisplayNameFor(model => model.RegistrationDate)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
 
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FirstName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LastName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.RegistrationDate)
-                            </td>
-                            <td>
-                                <a href="@Url.Action("Delete")/@item.Id" title="Brisanje" class="btn btn-sm btn-danger glyphicon glyphicon-trash pull-right"></a>
-                                <span class="pull-right ">&nbsp;</span>
-                                <a href="@Url.Action("Edit")/@item.Id" title="Izmena" class="btn btn-sm btn-success glyphicon glyphicon-pencil pull-right"></a>
-                            </td>
-                        </tr>
-                    }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td class="hidden-md hidden-sm hidden-xs">
+                                    @Html.DisplayFor(modelItem => item.RegistrationDate)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Delete")/@item.Id" title="Brisanje" class="btn btn-sm btn-danger glyphicon glyphicon-trash pull-right"></a>
+                                    <span class="pull-right ">&nbsp;</span>
+                                    <a href="@Url.Action("Edit")/@item.Id" title="Izmena" class="btn btn-sm btn-success glyphicon glyphicon-pencil pull-right"></a>
+                                </td>
+                            </tr>
+                        }
 
-                </table>
-            }
+                    </table>
+                }
+            </div>
         </div>
     </div>
 </section>
@@ -68,6 +70,7 @@
     <script>
         $(document).ready(function () {
             $("#users").DataTable({
+                responsive: true,
                 "language": {
                     "sProcessing": "Procesiranje u toku...",
                     "sLengthMenu": "Prikaži _MENU_ elemenata",

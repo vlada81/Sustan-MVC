@@ -19,6 +19,7 @@ using Sustan.ViewModels;
 namespace Sustan.Controllers
 {
     [RoutePrefix("Korisnici")]
+    [RequireHttps]
     [Authorize]
     public class AccountController : Controller
     {
@@ -92,7 +93,7 @@ namespace Sustan.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -103,7 +104,7 @@ namespace Sustan.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Neuspeli pokušaj prijave.");
+                    ModelState.AddModelError("", "Greška! Kombinacija email-a i lozinke nije ispravna. Molim Vas pokušajte ponovo.");
                     return View(model);
             }
         }

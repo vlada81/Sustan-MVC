@@ -9,64 +9,72 @@
 <section>
     <div class="container">
         <div class="row">
-            <div>
-                <h4>Stan @Html.DisplayFor(model => model.JIBS)</h4>
-                <hr />
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Building.JIBZ)
-                    </dt>
+            <div class="col-sm-12">
+                <div>
+                    <h4>Stan @Html.DisplayFor(model => model.JIBS)</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Building.JIBZ)
+                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Building.JIBZ)
-                    </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Building.JIBZ)
+                        </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.JIBS)
-                    </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.JIBS)
+                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.JIBS)
-                    </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.JIBS)
+                        </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ApartmentNumber)
-                    </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ApartmentNumber)
+                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.ApartmentNumber)
-                    </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.ApartmentNumber)
+                        </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ApartmentArea)
-                    </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ApartmentArea)
+                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.ApartmentArea)
-                    </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.ApartmentArea)
+                        </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.NumberOfTenants)
-                    </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.NumberOfTenants)
+                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.NumberOfTenants)
-                    </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.NumberOfTenants)
+                        </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.CostOfService)
-                    </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CostOfService)
+                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.CostOfService)
-                    </dd>
-                </dl>
-            </div>
-            <br />
-            <div>
-                @Html.ActionLink("Izmeni", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-default" })
+                        <dd id="cost-dd">
+                            @Html.DisplayFor(model => model.CostOfService) RSD
+                        </dd>
+                    </dl>
+                </div>
+                <br />
+                <div>
+                    @Html.ActionLink("Izmeni", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-default" })
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+@section scripts
+{
+
+
+}

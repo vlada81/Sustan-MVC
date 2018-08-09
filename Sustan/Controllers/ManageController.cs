@@ -10,6 +10,7 @@ using Sustan.Models;
 
 namespace Sustan.Controllers
 {
+    [RequireHttps]
     [Authorize(Roles = "Admin")]
     public class ManageController : Controller
     {

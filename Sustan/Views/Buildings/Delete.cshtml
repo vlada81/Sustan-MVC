@@ -9,128 +9,138 @@
 <section>
     <div class="container">
         <div class="row">
-            <h3>Da li sigurno želite da obrišete zgradu?</h3>
-            <div>
-                <hr />
-                <h3 class="text-danger text-center">@ViewBag.MessageTitle</h3>
-                <h4 class="text-danger text-center">@ViewBag.Message</h4>
-                <br />
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.JIBZ)
-                    </dt>
+            <div class="col-sm-12">
+                <h3>Da li sigurno želite da obrišete zgradu?</h3>
+                <div>
+                    <hr />
+                    <h3 class="text-danger text-center">@ViewBag.MessageTitle</h3>
+                    <h4 class="text-danger text-center">@ViewBag.Message</h4>
+                    <br />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            <strong>@Html.DisplayNameFor(model => model.JIBZ)</strong>
+                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.JIBZ)
-                    </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.JIBZ)
+                        </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Street)
-                    </dt>
+                        <dt>
+                            <strong>@Html.DisplayNameFor(model => model.Street)</strong>
+                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Street)
-                    </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Street)
+                        </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Number)
-                    </dt>
+                        <dt>
+                            <strong>@Html.DisplayNameFor(model => model.Number)</strong>
+                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Number)
-                    </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Number)
+                        </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Entrance)
-                    </dt>
+                        <dt>
+                            <strong>@Html.DisplayNameFor(model => model.Entrance)</strong>
+                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Entrance)
-                    </dd>
+                        <dd>
+                            @if (Model.Entrance.IsEmpty())
+                            {
+                                <div>-</div>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(model => model.Entrance)
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.NumberOfFloors)
-                    </dt>
+                            }
+                        </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.NumberOfFloors)
-                    </dd>
+                        <dt>
+                            <strong>@Html.DisplayNameFor(model => model.NumberOfFloors)</strong>
+                        </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Pib)
-                    </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.NumberOfFloors)
+                        </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Pib)
-                    </dd>
+                        <dt>
+                            <strong>@Html.DisplayNameFor(model => model.Pib)</strong>
+                        </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.BuildingRegistrationNumber)
-                    </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Pib)
+                        </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.BuildingRegistrationNumber)
-                    </dd>
+                        <dt>
+                            <strong>@Html.DisplayNameFor(model => model.BuildingRegistrationNumber)</strong>
+                        </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.AccountNumber)
-                    </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.BuildingRegistrationNumber)
+                        </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.AccountNumber)
-                    </dd>
+                        <dt>
+                            <strong>@Html.DisplayNameFor(model => model.AccountNumber)</strong>
+                        </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.AccountBalance)
-                    </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.AccountNumber)
+                        </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.AccountBalance)
-                    </dd>
+                        <dt>
+                            <strong>@Html.DisplayNameFor(model => model.AccountBalance)</strong>
+                        </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ParcelNumber)
-                    </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.AccountBalance)
+                        </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.ParcelNumber)
-                    </dd>
+                        <dt>
+                            <strong>@Html.DisplayNameFor(model => model.ParcelNumber)</strong>
+                        </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.BuildingArea)
-                    </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.ParcelNumber)
+                        </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.BuildingArea)
-                    </dd>
+                        <dt>
+                            <strong>@Html.DisplayNameFor(model => model.BuildingArea)</strong>
+                        </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.BuildingManager)
-                    </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.BuildingArea)
+                        </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.BuildingManager)
-                    </dd>
+                        <dt>
+                            <strong>@Html.DisplayNameFor(model => model.BuildingManager)</strong>
+                        </dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ImageUrl)
-                    </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.BuildingManager)
+                        </dd>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.ImageUrl)
-                    </dd>
+                        @*<dt>
+                                <strong>@Html.DisplayNameFor(model => model.ImageUrl)</strong>
+                            </dt>
 
-                </dl>
-                <br />
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
+                            <dd>
+                                @Html.DisplayFor(model => model.ImageUrl)
+                            </dd>*@
 
-                    <div class="form-actions no-color">
-                        @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-default" })
-                        <input type="submit" value="Obriši" class="btn btn-primary" />
-                    </div>
-                }
+                    </dl>
+                    <br />
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-default" })
+                            <input type="submit" value="Obriši" class="btn btn-primary" />
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>

@@ -1020,11 +1020,11 @@
 	var retinaLogos = function() {
 	  var retina = window.devicePixelRatio > 1 ? true : false;
 		if(retina) {
-			$('.header .logo').find('img').attr({src:'./images/logo@2x.png',width:'217',height:'35'});   
+			$('.header .logo').find('img').attr({ src:'/images/Logo_SU.png',width:'217',height:'35'});   
 		}
 
 		if(retina) {
-			$('.footer .logo').find('img').attr({src:'./images/logofooter@2x.png',width:'217',height:'35'});   
+			$('.footer .logo').find('img').attr({ src:'/images/Logo_SU.png',width:'217',height:'35'});   
 		}
 	};    
 	

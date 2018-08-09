@@ -22,8 +22,8 @@
         <div class="row">
             <div class="col-lg-6">
                 <div>
-                    <h2>Kontakt forma</h2>
-                    <hr />
+                    <h2 id="kontakt-forma">Kontakt forma</h2>
+                    <br />
                 </div>
                 @using (Html.BeginForm("Index", "Contact", FormMethod.Post, new { @id = "contactForm" }))
                 {
@@ -32,28 +32,28 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.FullName, new { @class = "control-label" })
                         <div>
-                            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @id = "fullNameId", autocomplete = "FullName" })
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", autocomplete = "FullName" })
                             @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Email, new { @class = "control-label" })
                         <div>
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "emailId", autocomplete = "Email" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autocomplete = "Email" })
                             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.PhoneNumber, new { @class = "control-label" })
                         <div>
-                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @id = "phoneNumber", autocomplete = "PhoneNumber" })
+                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", autocomplete = "PhoneNumber" })
                             @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Message, new { @class = "control-label" })
                         <div>
-                            @Html.TextAreaFor(m => m.Message, 10, 60, new { @class = "form-control", @id = "messageId", autocomplete = "Message" })
+                            @Html.TextAreaFor(m => m.Message, 10, 60, new { @class = "form-control", wrap = "hard", autocomplete = "Message" })
                             @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -68,62 +68,74 @@
                             <input type="submit" class="btn btn-default" value="Pošalji" />
                         </div>
                     </div>
-
-                    //Modal poruka nakon slanja emaila
-                    <div id="messageModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Sustan</h5>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Vaša poruka je uspešno poslata.</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 }
+                <br />
+                <br />
             </div>
-            <div class="col-lg-6">
+
+            <div class="col-lg-6 contact-icons">
                 <div>
                     <h2>Kontakt podaci</h2>
-                    <hr />
+                    <br />
                 </div>
                 <div class="info-box">
                     <h3>Poslovnica</h3>
                     <ul>
-                        <li>Braće Radić 12c, 24000 Subotica</li>
-                        <li><a href="mailto:info@sustan.rs">info@sustan.rs</a></li>
-                        <li><a href="tel:+381693939390">069 39 39 390</a></li>
+                        <li><i class="fa fa-building"></i>Braće Radić 12c, 24000 Subotica</li>
+                        <li><i class="fa fa-envelope"></i><a href="mailto:info@sustan.rs">info@sustan.rs</a></li>
+                        <li><i class="fa fa-phone"></i><a href="tel:+381693939390">069 39 39 390</a></li>
                     </ul>
                 </div>
                 <br />
                 <div class="info-box">
                     <h3>Kancelarija</h3>
                     <ul>
-                        <li>Đorđa Natoševića 30, 24000 Subotica</li>
-                        <li><a href="mailto:info@sustan.rs">info@sustan.rs</a></li>
-                        <li><a href="tel:+381693939390">069 39 39 390</a></li>
+                        <li><i class="fa fa-home"></i>Đorđa Natoševića 30, 24000 Subotica</li>
+                        <li><i class="fa fa-envelope"></i><a href="mailto:info@sustan.rs">info@sustan.rs</a></li>
+                        <li><i class="fa fa-phone"></i><a href="tel:+381693939390">069 39 39 390</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-
     </div>
-
 </section>
 
+<!-- The modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-uppercase" id="modalLabel">Obaveštenje!</h4>
+            </div>
+            <div class="modal-body text-center">
+                Kontakt forma trenutno nije u funkciji!<br />
+                Možete nas kontaktirati telefonom.<br />
+                Hvala na razumevanju.
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" data-dismiss="modal" value="Zatvori"/>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/Scripts/jqueryval")
     <script>
         $(document).ready(function () {
 
+            //$("#contactForm").click(function (e) {
+            //    e.preventDefault();
+            //    $("#myModal").modal('show');
+            //    return false;
+            //});
+
             $("#contactForm").validate({
                 errorClass: 'text-danger animation-slideDown',
-                
+
                 rules: {
                     'FullName': {
                         required: true,
@@ -158,16 +170,8 @@
                         maxlength: "Poruka ne može biti duža od 1000 karaktera."
                     }
                 }
-                
+
             });
-
-            //$("#contactForm").on('submit', function (e) {
-            //    $("#messageModal").modal('show');
-            //    e.preventDefault();
-            //});
-            
-
-
 
         });
 

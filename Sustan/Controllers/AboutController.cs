@@ -6,7 +6,8 @@ using System.Web.Mvc;
 
 namespace Sustan.Controllers
 {
-    [RoutePrefix("o-nama")]
+    [RequireHttps]
+    [RoutePrefix("O-nama")]
     public class AboutController : Controller
     {
         // GET: About

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Sustan.Controllers
 {
+    [RequireHttps]
     [RoutePrefix("Obrasci")]
     public class DownloadFormsController : Controller
     {

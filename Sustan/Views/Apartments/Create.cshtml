@@ -9,84 +9,168 @@
 <section>
     <div class="container">
         <div class="row">
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
+            <div class="col-sm-12">
+                @using (Html.BeginForm("Create", "Apartments", FormMethod.Post, new { @id = "createForm" }))
+                {
+                    @Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.BuildingId, "JIBZ", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownList("BuildingId", null, "- Izaberite zgradu -", htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.BuildingId, "", new { @class = "text-danger" })
+                    <p>@ViewBag.Error</p>
+                    <div class="form-horizontal">
+                        <br />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BuildingId, "JIBZ", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("BuildingId", null, "- Izaberite zgradu -", htmlAttributes: new { @class = "form-control", autocomplete = "BuildingId" })
+                                @Html.ValidationMessageFor(model => model.BuildingId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.JIBS, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.JIBS, new { htmlAttributes = new { @class = "form-control", placeholder = "npr: 172-02-15", autocomplete = "JIBS" } })
+                                @Html.ValidationMessageFor(model => model.JIBS, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ApartmentNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ApartmentNumber, new { htmlAttributes = new { @class = "form-control", autocomplete = "ApartmentNumber" } })
+                                @Html.ValidationMessageFor(model => model.ApartmentNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ApartmentArea, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ApartmentArea, new { htmlAttributes = new { @class = "form-control", placeholder = "npr: 56 ili 48.55", autocomplete = "ApartmentArea" } })
+                                @Html.ValidationMessageFor(model => model.ApartmentArea, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NumberOfTenants, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.NumberOfTenants, new { htmlAttributes = new { @class = "form-control", autocomplete = "NumberOfTenants" } })
+                                @Html.ValidationMessageFor(model => model.NumberOfTenants, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CostOfService, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.CostOfService, new { htmlAttributes = new { @class = "form-control", placeholder = "npr: 350 ili 450.99", autocomplete = "CostOfService" } })
+                                @Html.ValidationMessageFor(model => model.CostOfService, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UserId, "Korisnik", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("UserId", null, "- Izaberite korisnika -", htmlAttributes: new { @class = "form-control", autocomplete = "UserId" })
+                                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Dodaj" class="btn btn-primary" />
+                            </div>
                         </div>
                     </div>
+                }
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.JIBS, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.JIBS, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.JIBS, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ApartmentNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.ApartmentNumber, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.ApartmentNumber, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ApartmentArea, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.ApartmentArea, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.ApartmentArea, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.NumberOfTenants, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.NumberOfTenants, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.NumberOfTenants, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.CostOfService, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.CostOfService, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.CostOfService, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.UserId, "Korisnik", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.DropDownList("UserId", null, "- Izaberite korisnika -", htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Dodaj" class="btn btn-primary" />
-                        </div>
-                    </div>
+                <div>
+                    @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-default" })
                 </div>
-            }
-
-            <div>
-                @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-default" })
             </div>
         </div>
     </div>
 </section>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/Scripts/jqueryval")
+    <script>
+        $(document).ready(function () {
+
+            jQuery.validator.addMethod(
+                "regex",
+                function (value, element, regexp) {
+                    if (regexp.constructor != RegExp)
+                        regexp = new RegExp(regexp);
+                    else if (regexp.global)
+                        regexp.lastIndex = 0;
+                    return this.optional(element) || regexp.test(value);
+                }, "Pogrešan format zapisa!"
+            );
+
+            $("#createForm").validate({
+                errorClass: 'text-danger animation-slideDown',
+
+                rules: {
+                    'BuildingId': {
+                        required: true
+                    },
+                    'JIBS': {
+                        required: true,
+                        regex: /\d{2,4}-\d{2,4}-\d{2,4}/
+                    },
+                    'ApartmentNumber': {
+                        required: true,
+                        range: [0,200]
+                    },
+                    'ApartmentArea': {
+                        required: true,
+                        range: [0.00, 1000.00],
+                        regex: /\d+(\.\d{1,2})?/,
+                        number: true
+                    },
+                    'NumberOfTenants': {
+                        required: true,
+                        range: [1,10]
+                    },
+                    'CostOfService': {
+                        required: true,
+                        //regex: /\d+(\.\d{1,2})?/,
+                        number: true
+                    }
+                },
+                messages: {
+                    'BuildingId': {
+                        required: "Molim Vas izberite zgradu!"
+                    },
+                    'JIBS': {
+                        required: "Molim Vas unesite JIBS!",
+                        regex: "JIBS broj mora biti u formi 00-00-00 do 0000-0000-0000"
+                    },
+                    'ApartmentNumber': {
+                        required: "Molim Vas unesite broj stana!",
+                        range: "Broj stana mora biti između 0 i 200!"
+                    },
+                    'ApartmentArea': {
+                        required: "Molim Vas unesite kvadraturu stana!",
+                        range: "Kvadratura stana mora biti broj ne manji od 0 i veći od 1000 m2!",
+                        regex: "Molim Vas unesite broj sa dve decimale iza zareza."
+                    },
+                    'NumberOfTenants': {
+                        required: "Molim Vas unesite broj članova domaćinstva!",
+                        range: "Broj članova ne može biti manji od 1 niti veći od 10!"
+                    },
+                    'CostOfService': {
+                        required: "Molim Vas unesite etažninu!",
+                        //regex: "Etažnina mora biti broj sa dve decimale iza tačke."
+                    }
+                }
+
+            });
+
+           
+
+
+
+        });
+
+    </script>
 }

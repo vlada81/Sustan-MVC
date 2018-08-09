@@ -99,20 +99,20 @@
 
 /* Color */
 .title-section .title span, .contactform label.error, .start i, .section-about .fancybox.color-white:hover:after, .pricing-item .header-pricing .price-number, .pricing-item .header-pricing .symbol, .title-section .symbol, .fancybox:hover:after, .section-about .fancybox:hover:after, .iconbox .box-header .box-icon i, .flat-counter .numb-count, .countdown .square .numb, .iconbox.style2:hover .box-header .box-icon i {
-    color: #f2c21a;
+    color: #ff7642;
 }
 
 .fancybox:before, .flat-accordion .toggle-title.active::before, .testimonials.style2:hover .message, .testimonials.style2.active .message, .iconbox.style2 .box-header .box-icon, .title-section.style3 .title::before {
-    background-color: #f2c21a;    
+    background-color: #ff7642;    
 }
 
 /*color2 */
 .flat-accordion .toggle-title, .social-links.style3.team a:hover, .social-links.style3.team a, .title-section .sub-title.style2, .imagebox .imagebox-content .imagebox-title a:hover, .flat-counter.color-another .icon-count, .flat-counter.color-another .name-count {
-    color: #0f3661;
+    color: #343f44;
 }
 
 .flat-tabs ul.menu-tab li.active, .iconbox .effecthover, .infobox.style2 .info-map, .flat-team.style2 .info-team, .flat-quote .quote-link .flat-button.style2 {
-    background-color: #0f3661;
+    background-color: #343f44;
 }
 
 /* color3 */
@@ -160,7 +160,7 @@
     -webkit-border-radius: 2px;
             border-radius: 2px;
     display: inline-block;
-    background: #f2c21a;
+    background: #ff7642;
     color: #28293a;
     cursor: pointer;
     text-transform: uppercase; 
@@ -174,7 +174,7 @@
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    background: #0f3661;
+    background: #343f44;
     -webkit-transform-origin: 100% 50%;
     transform-origin: 100% 50%;
     -webkit-transform: scale3d(1, 2, 1);
@@ -196,12 +196,12 @@
 
 /* Style2 */
 .flat-button.style2 {
-    background-color: #0F3661;
+    background-color: #343f44;
     color: #fff;
 }
 
 .flat-button.style2::before {
-    background-color: #f2c21a;
+    background-color: #ff7642;
 }
 
 /* Style2 */
@@ -273,7 +273,7 @@
 .flat-row.v14 { padding: 61px 0px 71px; }
 
 /* Background Color */
-.bg-theme { background-color: #f2c21a; }
+.bg-theme { background-color: #ff7642; }
 .bg-section { background-color: #edeff1; }
 .bg-section2 { background-color: #f4f5f8; }
 
@@ -511,7 +511,7 @@
 .fancybox:before {
     width: 49px;
     height: 49px;
-    border: 1px solid #f2c21a;
+    border: 1px solid #ff7642;
     border-radius: 50%;
     top: 50%;
     margin-top: -23px;
@@ -766,7 +766,7 @@
 .iconbox.style2 .box-header .box-icon {
     width: 59px;
     height: 59px;
-    border: 1px solid #f2c21a;
+    border: 1px solid #ff7642;
     -webkit-border-radius: 50%;
             border-radius: 50%;
     text-align: center;  
@@ -1014,7 +1014,7 @@
 
 .info-box ul li {
     color: #3c3a42;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 24px;
 }
 
@@ -1051,7 +1051,7 @@
     margin-left: -10px;
     border-left: 12px solid white;
     border-right: 12px solid white;
-    border-bottom: 12px solid #0f3661;
+    border-bottom: 12px solid #343f44;
     transform: translateY(50%);
     border-left-color: transparent;
     border-right-color: transparent;
@@ -1089,7 +1089,7 @@
 }
 
 .testimonials.style2:hover .message::before, .testimonials.style2.active .message::before {
-    border-top: 8px solid #f2c21a;
+    border-top: 8px solid #ff7642;
 }
 
 .testimonials.style2 blockquote.whisper {
@@ -1123,12 +1123,12 @@
 }
 
 .flat-testimonials2.owl-theme .owl-dots .owl-dot span {
-    border: 2px solid #0f3661;
+    border: 2px solid #343f44;
     margin: 4px 5px 4px 6px;
 }
 
 .flat-testimonials2.owl-theme .owl-dots .owl-dot.active span, .flat-testimonials2.owl-theme .owl-dots .owl-dot:hover span {
-    background-color: #0f3661;
+    background-color: #343f44;
 }
 
 /* Style3 */
@@ -1333,7 +1333,7 @@
     width: 100%;
     left: 0;
     top: 0;
-    background-color: #f2c21a;
+    background-color: #ff7642;
     padding: 25px 0px;
 }
 

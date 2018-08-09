@@ -20,7 +20,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44332</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -37,6 +37,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +50,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+    <IncludeIisSettings>false</IncludeIisSettings>
+    <PublishDatabases>true</PublishDatabases>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -200,6 +207,7 @@
     <Compile Include="Controllers\BuildingsController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DownloadFormsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FaqController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -240,6 +248,10 @@
     <Compile Include="Migrations\201807241956054_ContactChanges.Designer.cs">
       <DependentUpon>201807241956054_ContactChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807260854142_SomeBuildingModelChanges.cs" />
+    <Compile Include="Migrations\201807260854142_SomeBuildingModelChanges.Designer.cs">
+      <DependentUpon>201807260854142_SomeBuildingModelChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Apartment.cs" />
@@ -257,6 +269,13 @@
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\404\404-not-found.gif" />
+    <Content Include="Content\404\500-error.gif" />
+    <Content Include="Content\404\animate-lock.gif" />
+    <Content Include="Content\404\giphy.gif" />
+    <Content Include="Content\404\sammy-404.gif" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\revolution\css\layers.css" />
@@ -493,12 +512,12 @@
     <Content Include="images\services\s5.jpg" />
     <Content Include="images\services\s6.jpg" />
     <Content Include="images\services\s7.jpg" />
+    <Content Include="images\services\service.png" />
     <Content Include="images\services\video.jpg" />
     <Content Include="images\services\video2.jpg" />
     <Content Include="images\services\video3.jpg" />
     <Content Include="images\services\w1.jpg" />
     <Content Include="images\slides\slider.jpg" />
-    <Content Include="images\slides\slider_main_bg.jpg" />
     <Content Include="Scripts\AdminMenu.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -593,7 +612,6 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -622,9 +640,22 @@
     <Content Include="Mvc.sitemap">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\Download\Izjava-za-promenu-podataka-o-stanu.pdf" />
+    <Content Include="Content\Download\Molba-za-izdavanje-listinga.pdf" />
+    <Content Include="Content\Download\Molba-za-promenu-dostavne-adrese.pdf" />
+    <Content Include="Content\Download\Molba-za-promenu-imena.pdf" />
+    <Content Include="Content\Download\Potrosnja-hladne-vode-samocitaci.pdf" />
+    <Content Include="Content\Download\Potvrda-o-broju-clanova-domacinstva-pojedinacno.pdf" />
+    <Content Include="Content\Download\Potvrda-o-broju-clanova-domacinstva-zgrada.pdf" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-1.11.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.11.1.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\jquery-countTo.js" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery-validate.js" />
@@ -638,6 +669,12 @@
     <Content Include="Scripts\jquery.isotope.min.js" />
     <Content Include="Scripts\jquery.magnific-popup.min.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modern.custom.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -730,11 +767,14 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Home\Info.cshtml" />
     <Content Include="Views\Home\Content\_Faq.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
     <Content Include="Views\Shared\_AdminPageTitle.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -763,6 +803,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807241956054_ContactChanges.resx">
       <DependentUpon>201807241956054_ContactChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807260854142_SomeBuildingModelChanges.resx">
+      <DependentUpon>201807260854142_SomeBuildingModelChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

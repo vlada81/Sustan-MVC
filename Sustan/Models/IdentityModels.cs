@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -10,7 +11,9 @@ namespace Sustan.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        [RegularExpression(@"^[\p{L}][\p{L}\s-]*$", ErrorMessage = "Ime korisnika može sadržati samo slova")]
         public string FirstName { get; set; }
+        [RegularExpression(@"^[\p{L}][\p{L}\s-]*$", ErrorMessage = "Prezime korisnika može sadržati samo slova")]
         public string LastName { get; set; }
         public DateTime RegistrationDate { get; set; }
 

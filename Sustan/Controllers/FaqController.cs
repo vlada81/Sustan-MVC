@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Sustan.Controllers
 {
+    [RequireHttps]
     [RoutePrefix("Cesta-pitanja")]
     public class FaqController : Controller
     {

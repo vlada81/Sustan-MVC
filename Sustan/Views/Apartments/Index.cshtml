@@ -9,76 +9,78 @@
 <section>
     <div class="container">
         <div class="row">
-            <br />
-            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-            {
-                <div class="my-btn-add">
-                    @Html.Partial("_CreateButtonPartial")
-                </div>
-                <table id="apartment" class="table table-bordered table-hover table-striped table-responsive">
-                    <thead>
-                        <tr class="bg-primary">
-                            <th>
-                                @Html.DisplayNameFor(model => model.Building.JIBZ)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.JIBS)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ApartmentNumber)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ApartmentArea)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.NumberOfTenants)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CostOfService)
-                            </th>
-                            <th>
-                                @Html.DisplayName("Korisnik")
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
+            <div class="col-sm-12">
+                <br />
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <div class="my-btn-add">
+                        @Html.Partial("_CreateButtonPartial")
+                    </div>
+                    <table id="apartment" class="table table-striped table-bordered nowrap" style="width:100%">
+                        <thead>
+                            <tr class="bg-primary">
+                                <th class="hidden-md hidden-sm hidden-xs">
+                                    @Html.DisplayNameFor(model => model.Building.JIBZ)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.JIBS)
+                                </th>
+                                <th class="hidden-sm hidden-xs">
+                                    @Html.DisplayNameFor(model => model.ApartmentNumber)
+                                </th>
+                                <th class="hidden-md hidden-sm hidden-xs">
+                                    @Html.DisplayNameFor(model => model.ApartmentArea)
+                                </th>
+                                <th class="hidden-md hidden-sm hidden-xs">
+                                    @Html.DisplayNameFor(model => model.NumberOfTenants)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.CostOfService)
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Korisnik")
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
 
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Building.JIBZ)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.JIBS)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ApartmentNumber)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ApartmentArea)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NumberOfTenants)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CostOfService)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.User.Email)
-                            </td>
-                            <td>
-                                <a href="@Url.Action("Delete")/@item.Id" title="Brisanje" class="btn btn-sm btn-danger glyphicon glyphicon-trash pull-right"></a>
-                                <span class="pull-right ">&nbsp;</span>
-                                <a href="@Url.Action("Details")/@item.Id" title="Detalji" class="btn btn-sm btn-primary glyphicon glyphicon-list pull-right"></a>
-                                <span class="pull-right">&nbsp;</span>
-                                <a href="@Url.Action("Edit")/@item.Id" title="Izmena" class="btn btn-sm btn-success glyphicon glyphicon-pencil pull-right"></a>
-                            </td>
-                        </tr>
-                    }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="hidden-md hidden-sm hidden-xs">
+                                    @Html.DisplayFor(modelItem => item.Building.JIBZ)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.JIBS)
+                                </td>
+                                <td class="hidden-sm hidden-xs">
+                                    @Html.DisplayFor(modelItem => item.ApartmentNumber)
+                                </td>
+                                <td class="hidden-md hidden-sm hidden-xs">
+                                    @Html.DisplayFor(modelItem => item.ApartmentArea)
+                                </td>
+                                <td class="hidden-md hidden-sm hidden-xs">
+                                    @Html.DisplayFor(modelItem => item.NumberOfTenants)
+                                </td>
+                                <td id="cost-td">
+                                    @Html.DisplayFor(modelItem => item.CostOfService, null, new { @id = "cost-display"}) RSD
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.User.Email)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Delete")/@item.Id" title="Brisanje" class="btn btn-sm btn-danger glyphicon glyphicon-trash pull-right"></a>
+                                    <span class="pull-right ">&nbsp;</span>
+                                    <a href="@Url.Action("Details")/@item.Id" title="Detalji" class="btn btn-sm btn-primary glyphicon glyphicon-list pull-right"></a>
+                                    <span class="pull-right">&nbsp;</span>
+                                    <a href="@Url.Action("Edit")/@item.Id" title="Izmena" class="btn btn-sm btn-success glyphicon glyphicon-pencil pull-right"></a>
+                                </td>
+                            </tr>
+                        }
 
-                </table>
-            }
+                    </table>
+                }
+            </div>
         </div>
     </div>
 </section>
@@ -88,6 +90,8 @@
     <script>
         $(document).ready(function () {
             $("#apartment").DataTable({
+                responsive: true,
+                "scrollX": true,
                 "language": {
                     "sProcessing": "Procesiranje u toku...",
                     "sLengthMenu": "Prikaži _MENU_ elemenata",
@@ -106,7 +110,7 @@
                     }
                 }
             });
-
+    
         });
     </script>
 }

@@ -9,14 +9,14 @@ namespace Sustan
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/scripts/jquery.min.js",
+                        "~/scripts/jquery-1.11.1.min.js",
                         "~/Scripts/AdminMenu.js",
                         "~/scripts/datatables/jquery.datatables.js",
                         "~/scripts/datatables/datatables.bootstrap.js"
                         ));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"
+            bundles.Add(new ScriptBundle("~/bundles/Scripts/jqueryval").Include(
+                        "~/Scripts/jquery.validate.min.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/theme/scripts").Include(
@@ -33,7 +33,7 @@ namespace Sustan
 
                         "~/Scripts/main.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/slider").Include(
+            bundles.Add(new ScriptBundle("~/bundles/sliders").Include(
                         "~/Content/revolution/js/jquery.themepunch.tools.min.js",
                         "~/Content/revolution/js/jquery.themepunch.revolution.min.js",
                         "~/Content/revolution/js/slider.js"));
@@ -53,17 +53,17 @@ namespace Sustan
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            bundles.Add(new ScriptBundle("~/bundles/bootstraps").Include(
                         "~/Scripts/bootstrap.min.js",
                         "~/Scripts/bootbox.js",
                         "~/Scripts/respond.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/content/datatables/css/datatables.bootstrap.css",
-                      "~/Content/footer.css",
-                      "~/Content/site.css"));
+            //bundles.Add(new StyleBundle("~/Content/styles").Include(
+            //          "~/content/datatables/css/datatables.bootstrap.css",
+            //          "~/Content/footer.css",
+            //          "~/Content/site.css"));
 
-            bundles.Add(new StyleBundle("~/css").Include(
+            bundles.Add(new StyleBundle("~/css/foo").Include(
                       "~/content/bootstrap.css",
                       "~/content/datatables/css/datatables.bootstrap.css",
                       "~/css/style.css",

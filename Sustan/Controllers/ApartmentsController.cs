@@ -14,6 +14,7 @@ using Sustan.Repository;
 
 namespace Sustan.Controllers
 {
+    [RequireHttps]
     [Authorize]
     [RoutePrefix("Stanovi")]
     public class ApartmentsController : Controller
@@ -91,6 +92,19 @@ namespace Sustan.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            //Problem postoji kada se kreira novi stan koji ne postoji u bazi jer vraca null vrednost zbog FirstOrDefault()
+            //var apartmentNumberInUse = _repository.GetAll().Where(c => c.JIBS == apartment.JIBS);
+
+            //if (apartmentNumberInUse.Last().JIBS == apartment.JIBS)
+            //{
+            //    ViewBag.Error = "Broj stana te zgrade već postoji u bazi.";
+
+            //    ViewBag.BuildingId = new SelectList(_repository.GetBuildings(), "Id", "JIBZ", apartment.BuildingId);
+            //    ViewBag.UserId = new SelectList(_repository.GetUsers(), "Id", "Email", apartment.UserId);
+
+            //    return View(apartment);
+            //}
 
             if (ModelState.IsValid)
             {
@@ -194,6 +208,6 @@ namespace Sustan.Controllers
             _repository.Delete(apartment);
             return RedirectToAction("Index");
         }
-        
+
     }
 }

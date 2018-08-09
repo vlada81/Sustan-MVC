@@ -16,12 +16,12 @@ namespace Sustan.ViewModels
 
         [Required(ErrorMessage = "Obavezno polje!")]
         [StringLength(50, ErrorMessage = "Ime ne može biti duže od 50 karaktera")]
-        [Display(Name = "Ime korisnika")]
+        [Display(Name = "Ime")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Obavezno polje!")]
         [StringLength(50, ErrorMessage = "Prezime ne može biti duže od 50 karaktera")]
-        [Display(Name = "Prezime korisnika")]
+        [Display(Name = "Prezime")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Obavezno polje!")]

@@ -1,17 +1,16 @@
-﻿@using Sustan.Models
-@model LoginViewModel
+﻿@model Sustan.Models.LoginViewModel
 
 @{
-    ViewBag.Title = "Prijavi se";
+    ViewBag.Title = "Prijava";
 }
 
 <section class="flat-row services-details">
     <div class="container">
-        <h2>@ViewBag.Title.</h2>
+        <h2>@ViewBag.Title:</h2>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6 my-btn-add">
                 <section id="loginForm">
-                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "loginForm", role = "form" }))
                     {
 
                         @Html.AntiForgeryToken()
@@ -21,25 +20,26 @@
                         <div class="form-group">
                             @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
                             <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autocomplete = "Email" })
                                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
                             <div class="col-md-10">
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", autocomplete = "Password" })
                                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <div class="checkbox">
-                                    @Html.CheckBoxFor(m => m.RememberMe)
-                                    @Html.LabelFor(m => m.RememberMe)
-                                </div>
+                        <br />
+                        @*<div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
                             </div>
                         </div>
+                    </div>*@
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <input type="submit" value="Prijava" class="btn btn-default" />
@@ -48,10 +48,20 @@
                     }
                 </section>
             </div>
+            <div class="col-md-6">
+                <br />
+                <h5 class="text-justify">Dragi korisnici, ukoliko još uvek nemate kreiran nalog na našem portalu, molimo Vas da nam pošaljete vašu E-mail adresu preko kontakt forme.</h5>
+                <div>
+                    <a class="btn btn-default text-uppercase center-block" href="/Kontakt#kontakt-forma">Kontakt forma</a>
+                </div>
+                <h5 class="text-justify margin-top-50">Nakon kreiranja naloga, Vaše pristupne podatke ćemo vam proslediti na Vašu E-mail adresu.</h5>
+            </div>
         </div>
     </div>
 </section>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/Scripts/jqueryval")
+
+  
 }

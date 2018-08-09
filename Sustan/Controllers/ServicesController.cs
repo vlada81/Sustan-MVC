@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Sustan.Controllers
 {
+    [RequireHttps]
     [RoutePrefix("Nase-usluge")]
     public class ServicesController : Controller
     {

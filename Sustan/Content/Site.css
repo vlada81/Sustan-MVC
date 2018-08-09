@@ -156,3 +156,55 @@ p {
 .form-error-text {
     color: red;
 }
+
+.txt-404 {
+    font-size: 4em;
+    font-weight: 700;
+    margin: 20px 0 20px 0;
+    line-height: 1em;
+}
+
+.txt-404-big {
+    font-size: 28px;
+    margin: 0 0 20px 0;
+    line-height: 1.1em;
+}
+.txt-404-small {
+    font-size: 18px;
+    margin-bottom: 50px;
+    line-height: 1.1em;
+}
+
+.btn-500-error {
+    margin: 20px 0 50px 0;
+}
+
+.download-links-txt li {
+    line-height: 2em;
+}
+
+@media (max-width: 610px) {
+    .download-links-txt li {
+        line-height: 2em;
+    }
+    .post-grid .entry .content-post .title-post, .item .content-item .title-item, .project-dynamic .entry .content-post .title-post, .blog-shortcode.post-list .entry .content-post .title-post {
+        font-size: 0.9em;
+        margin-bottom: 50px;
+    }
+    .download-title-txt {
+        font-size: 16px;
+    }
+}
+
+.contact-icons i {
+    margin-right: 10px;
+    line-height: 2.3em;
+}
+
+.margin-left-20 {
+    margin-left: 20px;
+}
+
+.margin-top-50 {
+    margin-top: 50px;
+}

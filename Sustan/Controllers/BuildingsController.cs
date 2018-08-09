@@ -13,6 +13,7 @@ using Sustan.Repository;
 
 namespace Sustan.Controllers
 {
+    [RequireHttps]
     [Authorize(Roles = "Admin")]
     [RoutePrefix("Zgrade")]
     public class BuildingsController : Controller
@@ -176,7 +177,7 @@ namespace Sustan.Controllers
                 {
                     ViewBag.MessageTitle = "Nije moguće obrisati zgradu!";
                     ViewBag.Message = "Prvo morate obrisati sve stanove koji pripadaju zgradi.";
-                    return View();
+                    return View(building);
                 }
             }
 

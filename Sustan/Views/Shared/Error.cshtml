@@ -1,9 +1,18 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 @{
-    ViewBag.Title = "Error";
+    ViewBag.Title = "Greška";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
 
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <img src="~/Content/404/500-error.gif" width="450"/>
+                <div class="txt-404-big">Uuups, došlo je do nepredviđene greške!</div>
+                <a class="btn btn-primary btn-500-error" href="/">Nazad na početnu</a>
+            </div>
+        </div>
+    </div>
+</section>
