@@ -11,6 +11,7 @@ using Sustan.Models;
 using Sustan.Repository.Interfaces;
 using Microsoft.AspNet.Identity;
 using Sustan.Repository;
+using System.IO;
 
 namespace Sustan.Controllers
 {
@@ -86,7 +87,7 @@ namespace Sustan.Controllers
         [Route("Kreiranje")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,JIBS,ApartmentNumber,ApartmentArea,NumberOfTenants,CostOfService,BuildingId,UserId")] Apartment apartment)
+        public ActionResult Create([Bind(Include = "Id,JIBS,ApartmentNumber,ApartmentArea,NumberOfTenants,CostOfService,BuildingId,UserId,ApartmentBillUrl")] Apartment apartment, HttpPostedFileBase upload)
         {
             if (apartment == null)
             {
@@ -108,6 +109,13 @@ namespace Sustan.Controllers
 
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var path = Path.Combine(Server.MapPath("~/Uploads/Documents/"), Path.GetFileName(upload.FileName));
+                    upload.SaveAs(path);
+                    apartment.ApartmentBillUrl = "~/Uploads/Documents/" + upload.FileName;
+                }
+
                 _repository.Create(apartment);
                 return RedirectToAction("Index");
             }
@@ -144,7 +152,7 @@ namespace Sustan.Controllers
         [Route("Izmena/{id?}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,JIBS,ApartmentNumber,ApartmentArea,NumberOfTenants,CostOfService,BuildingId,UserId")] Apartment apartment, int id)
+        public ActionResult Edit([Bind(Include = "Id,JIBS,ApartmentNumber,ApartmentArea,NumberOfTenants,CostOfService,BuildingId,UserId,ApartmentBillUrl")] Apartment apartment, int id, HttpPostedFileBase upload)
         {
             if (id != apartment.Id)
             {
@@ -153,7 +161,22 @@ namespace Sustan.Controllers
 
             if (ModelState.IsValid)
             {
-                _repository.Update(apartment);
+                var model = _repository.GetById(id);
+                var oldFilePath = model.ApartmentBillUrl;
+
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var path = Path.Combine(Server.MapPath("~/Uploads/Documents/"), Path.GetFileName(upload.FileName));
+                    upload.SaveAs(path);
+                    model.ApartmentBillUrl   = "~/Uploads/Documents/" + upload.FileName;
+                    string fullPath = Request.MapPath(oldFilePath);
+                    if (System.IO.File.Exists(fullPath))
+                    {
+                        System.IO.File.Delete(fullPath);
+                    }
+                }
+
+                _repository.Update(model);
 
                 try
                 {
@@ -205,6 +228,13 @@ namespace Sustan.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Apartment apartment = _repository.GetById(id);
+
+            string fullPath = Request.MapPath(apartment.ApartmentBillUrl);
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+            }
+
             _repository.Delete(apartment);
             return RedirectToAction("Index");
         }

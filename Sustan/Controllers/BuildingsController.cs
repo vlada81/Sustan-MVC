@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using Sustan.Models;
 using Sustan.Repository.Interfaces;
 using Sustan.Repository;
+using System.IO;
 
 namespace Sustan.Controllers
 {
@@ -67,10 +68,17 @@ namespace Sustan.Controllers
         [Route("Kreiranje")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,JIBZ,Street,Number,Entrance,NumberOfFloors,Pib,BuildingRegistrationNumber,AccountNumber,AccountBalance,ParcelNumber,BuildingArea,BuildingManager,ImageUrl")] Building building)
+        public ActionResult Create([Bind(Include = "Id,JIBZ,Street,Number,Entrance,NumberOfFloors,Pib,BuildingRegistrationNumber,AccountNumber,AccountBalance,ParcelNumber,BuildingArea,BuildingManager,ImageUrl")] Building building, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var path = Path.Combine(Server.MapPath("~/Uploads/Images/"), Path.GetFileName(upload.FileName));
+                    upload.SaveAs(path);
+                    building.ImageUrl = "~/Uploads/Images/" + upload.FileName;
+                }
+
                 _repository.Create(building);
                 return RedirectToAction("Index");
             }
@@ -100,7 +108,7 @@ namespace Sustan.Controllers
         [Route("Izmena/{id?}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,JIBZ,Street,Number,Entrance,NumberOfFloors,Pib,BuildingRegistrationNumber,AccountNumber,AccountBalance,ParcelNumber,BuildingArea,BuildingManager,ImageUrl")] Building building, int id)
+        public ActionResult Edit([Bind(Include = "Id,JIBZ,Street,Number,Entrance,NumberOfFloors,Pib,BuildingRegistrationNumber,AccountNumber,AccountBalance,ParcelNumber,BuildingArea,BuildingManager,ImageUrl")] Building building, int id, HttpPostedFileBase upload)
         {
             if (id != building.Id)
             {
@@ -109,7 +117,22 @@ namespace Sustan.Controllers
 
             if (ModelState.IsValid)
             {
-                _repository.Update(building);
+                var model = _repository.GetById(building.Id);
+                var oldFilePath = model.ImageUrl;
+
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var path = Path.Combine(Server.MapPath("~/Uploads/Images/"), Path.GetFileName(upload.FileName));
+                    upload.SaveAs(path);
+                    model.ImageUrl = "~/Uploads/Images/" + upload.FileName;
+                    string fullPath = Request.MapPath(oldFilePath);
+                    if (System.IO.File.Exists(fullPath))
+                    {
+                        System.IO.File.Delete(fullPath);
+                    }
+                }
+
+                _repository.Update(model);
 
                 try
                 {
@@ -168,6 +191,7 @@ namespace Sustan.Controllers
 
                 throw;
             }
+
             Building building = _repository.GetById(id);
 
             var apartments = _repository.GetApartments();
@@ -179,6 +203,12 @@ namespace Sustan.Controllers
                     ViewBag.Message = "Prvo morate obrisati sve stanove koji pripadaju zgradi.";
                     return View(building);
                 }
+            }
+
+            string fullPath = Request.MapPath(building.ImageUrl);
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
             }
 
             _repository.Delete(building);

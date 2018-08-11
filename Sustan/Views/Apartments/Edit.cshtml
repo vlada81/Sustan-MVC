@@ -10,78 +10,96 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                @using (Html.BeginForm("Edit", "Apartments", FormMethod.Post, new { @id = "editForm" }))
+                @using (Html.BeginForm("Edit", "Apartments", FormMethod.Post, new { @id = "editForm", enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
 
-                    <div class="form-horizontal">
-                        <h4>Stan: @Html.DisplayFor(model => model.JIBS)</h4>
-                        <br />
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @Html.HiddenFor(model => model.Id)
+                <div class="form-horizontal">
+                    <h4>Stan: @Html.DisplayFor(model => model.JIBS)</h4>
+                    <br />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.BuildingId, "JIBZ", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.DropDownList("BuildingId", null, "- Izaberite zgradu -", htmlAttributes: new { @class = "form-control", autocomplete = "BuildingId" })
-                                @Html.ValidationMessageFor(model => model.BuildingId, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.JIBS, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.JIBS, new { htmlAttributes = new { @class = "form-control", autocomplete = "JIBS" } })
-                                @Html.ValidationMessageFor(model => model.JIBS, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.ApartmentNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.ApartmentNumber, new { htmlAttributes = new { @class = "form-control", autocomplete = "ApartmentNumber" } })
-                                @Html.ValidationMessageFor(model => model.ApartmentNumber, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.ApartmentArea, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.ApartmentArea, new { htmlAttributes = new { @class = "form-control", autocomplete = "ApartmentArea" } })
-                                @Html.ValidationMessageFor(model => model.ApartmentArea, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.NumberOfTenants, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.NumberOfTenants, new { htmlAttributes = new { @class = "form-control", autocomplete = "NumberOfTenants" } })
-                                @Html.ValidationMessageFor(model => model.NumberOfTenants, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.CostOfService, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.CostOfService, new { htmlAttributes = new { @class = "form-control", autocomplete = "CostOfService" } })
-                                @Html.ValidationMessageFor(model => model.CostOfService, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.UserId, "Korisnik", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.DropDownList("UserId", null, "- Izaberite korisnika -", htmlAttributes: new { @class = "form-control", autocomplete = "UserId" })
-                                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Sačuvaj" class="btn btn-primary" />
-                            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BuildingId, "JIBZ", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("BuildingId", null, "- Izaberite zgradu -", htmlAttributes: new { @class = "form-control", autocomplete = "BuildingId" })
+                            @Html.ValidationMessageFor(model => model.BuildingId, "", new { @class = "text-danger" })
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.JIBS, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.JIBS, new { htmlAttributes = new { @class = "form-control", autocomplete = "JIBS" } })
+                            @Html.ValidationMessageFor(model => model.JIBS, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ApartmentNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ApartmentNumber, new { htmlAttributes = new { @class = "form-control", autocomplete = "ApartmentNumber" } })
+                            @Html.ValidationMessageFor(model => model.ApartmentNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ApartmentArea, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ApartmentArea, new { htmlAttributes = new { @class = "form-control", autocomplete = "ApartmentArea" } })
+                            @Html.ValidationMessageFor(model => model.ApartmentArea, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NumberOfTenants, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NumberOfTenants, new { htmlAttributes = new { @class = "form-control", autocomplete = "NumberOfTenants" } })
+                            @Html.ValidationMessageFor(model => model.NumberOfTenants, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CostOfService, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CostOfService, new { htmlAttributes = new { @class = "form-control", autocomplete = "CostOfService" } })
+                            @Html.ValidationMessageFor(model => model.CostOfService, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserId, "Korisnik", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("UserId", null, "- Izaberite korisnika -", htmlAttributes: new { @class = "form-control", autocomplete = "UserId" })
+                            @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Poslednji račun</label>
+                        <div class="col-md-10">
+                            @if (Model.ApartmentBillUrl != null)
+                            {
+                            <label class="control-label">@Url.Content(Model.ApartmentBillUrl)</label>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ApartmentBillUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input class="control-label" type="file" id="Document" name="upload" />
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Sačuvaj" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
                 }
 
                 <div>
@@ -108,6 +126,10 @@
                     return this.optional(element) || regexp.test(value);
                 }, "Pogrešan format zapisa!"
             );
+
+            $.validator.addMethod('filesize', function (value, element, param) {
+                return this.optional(element) || (element.files[0].size <= param)
+            }, 'File size must be less than {0}');
 
             $("#editForm").validate({
                 errorClass: 'text-danger animation-slideDown',
@@ -138,6 +160,10 @@
                         required: true,
                         //regex: /\d+(\.\d{1,2})?/,
                         number: true
+                    },
+                    upload: {
+                        filesize: 5000000,
+                        extension: 'pdf'
                     }
                 },
                 messages: {
@@ -164,9 +190,12 @@
                     'CostOfService': {
                         required: "Molim Vas unesite etažninu!",
                         //regex: "Etažnina mora biti broj sa dve decimale iza tačke."
+                    },
+                    upload: {
+                        filesize: "Veličina fajla ne može biti veća od 5MB.",
+                        extension: "Podrzan format fajla je PDF."
                     }
                 }
-
             });
 
         });

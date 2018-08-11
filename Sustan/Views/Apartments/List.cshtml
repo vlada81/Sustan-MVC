@@ -6,8 +6,126 @@
 
 @Html.Partial("_AdminPageTitle")
 
+
+@* TABELA SA PODACIMA KORISNIKA *@
 <section class="flat-row services-details">
     <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Podaci stana</h2>
+                <br />
+
+                <table id="userApartment" class="table table-striped table-bordered nowrap" style="width:100%">
+                    <thead>
+                        <tr class="bg-primary">
+                            <th>
+                                <label title="Jedinstveni identifikacioni broj zgrade">JIBZ</label>
+                            </th>
+                            <th>
+                                <label title="Jedinstveni identifikacioni broj stana">JIBS</label>
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Apartment.ApartmentNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Apartment.ApartmentArea)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Apartment.NumberOfTenants)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Apartment.CostOfService)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.Apartment.User.Email)
+                            </th>
+                        </tr>
+                    </thead>
+
+                    @foreach (var item in Model.Apartments)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Building.JIBZ)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.JIBS)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ApartmentNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ApartmentArea)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NumberOfTenants)
+                            </td>
+                            <td id="cost-td">
+                                @Html.DisplayFor(modelItem => item.CostOfService) RSD
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.Email)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<hr />
+
+@* DOKUMENTACIJA ZA PREUZIMANJE *@
+<section class="flat-row services-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Dokumentacija za preuzimanje</h2>
+                <div class="col-md-6">
+                    @{
+                        var month = DateTime.Today.ToLongDateString();
+                        string[] m = month.Split(' ');
+                        month = m[2];
+                    }
+                    <h3>Račun za @month:</h3>
+                    <br />
+
+                    @foreach (var item in Model.Apartments)
+                    {
+                        <div class="col-sm-6">
+                            @if (item.Building.Apartments.Count() != 1)
+                            {
+                                break;
+                            }
+                            else
+                            {
+
+                                <h6>Zgrada: @Html.DisplayFor(modelItem => item.Building.Street) @Html.DisplayFor(modelItem => item.Building.Number)</h6>
+                                <h6>Stan: @Html.DisplayFor(modelItem => item.ApartmentNumber) </h6>
+                                <br />
+                                if (item.ApartmentBillUrl != null)
+                                {
+                                    <a class="btn btn-default" target="_blank" href="@Url.Content(item.ApartmentBillUrl)"><i class="fa fa-download"></i> Račun - preuzimanje</a>
+                                }
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="col-md-6">
+                    <h3>Ostali dokumenti:</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<hr />
+
+@* PRIKAZ PODATAKA ZGRADE SA SLIKOM *@
+<section class="flat-row services-details">
+    <div class="container flat-row">
+        <h2>Podaci zgrade</h2>
         <div class="row">
             <div class="col-sm-12">
                 @foreach (var item in Model.Apartments)
@@ -21,9 +139,13 @@
                         {
 
                             <h4>Zgrada: @Html.DisplayFor(modelItem => item.Building.Street) @Html.DisplayFor(modelItem => item.Building.Number)</h4>
-                            @*<div class="img-responsive">
-                                <img class="img-thumbnail" src="@item.Building.ImageUrl" width="450" />
-                            </div>*@
+                            if (item.Building.ImageUrl != null)
+                            {
+                                <div class="img-responsive">
+                                    <img class="img-thumbnail" src="@Url.Content(item.Building.ImageUrl)" width="450" />
+                                </div>
+                            }
+
                             <br />
                             <dl class="dl-horizontal">
                                 <dt>
@@ -119,6 +241,7 @@
                                 </dd>
                             </dl>
                             <br />
+
                         }
                     </div>
                 }
@@ -127,71 +250,8 @@
     </div>
     <br />
     <br />
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h2>Podaci stana</h2>
-                <br />
 
-                <table id="userApartment" class="table table-striped table-bordered nowrap" style="width:100%">
-                    <thead>
-                        <tr class="bg-primary">
-                            <th>
-                                <label title="Jedinstveni identifikacioni broj zgrade">JIBZ</label>
-                            </th>
-                            <th>
-                                <label title="Jedinstveni identifikacioni broj stana">JIBS</label>
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Apartment.ApartmentNumber)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Apartment.ApartmentArea)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Apartment.NumberOfTenants)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Apartment.CostOfService)
-                            </th>
 
-                            <th>
-                                @Html.DisplayNameFor(model => model.Apartment.User.Email)
-                            </th>
-                        </tr>
-                    </thead>
-
-                    @foreach (var item in Model.Apartments)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Building.JIBZ)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.JIBS)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ApartmentNumber)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ApartmentArea)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NumberOfTenants)
-                            </td>
-                            <td id="cost-td">
-                                @Html.DisplayFor(modelItem => item.CostOfService) RSD
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.User.Email)
-                            </td>
-                        </tr>
-                    }
-
-                </table>
-            </div>
-        </div>
-    </div>
 </section>
 
 @section scripts
@@ -220,7 +280,6 @@
                 }
             });
 
-       
-        })
+        });
     </script>
 }

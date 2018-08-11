@@ -73,9 +73,8 @@ namespace Sustan.Models
         public string BuildingManager { get; set; }
 
         [MaxLength(1024)]
-        [Display(Name = "Url slike")]
+        [Display(Name = "Slika zgrade")]
         public string ImageUrl { get; set; }
-
 
         public ICollection<Apartment> Apartments { get; set; }
     }

@@ -252,11 +252,16 @@
     <Compile Include="Migrations\201807260854142_SomeBuildingModelChanges.Designer.cs">
       <DependentUpon>201807260854142_SomeBuildingModelChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808101031394_AddingBillUrlInApartment.cs" />
+    <Compile Include="Migrations\201808101031394_AddingBillUrlInApartment.Designer.cs">
+      <DependentUpon>201808101031394_AddingBillUrlInApartment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Apartment.cs" />
     <Compile Include="Models\Building.cs" />
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -690,6 +695,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Uploads\Images\Zgrada-3.jpeg" />
+    <Content Include="Uploads\Images\Zgrada1.jpg" />
+    <Content Include="Uploads\Images\Zgrada2.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -774,6 +782,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\Documents\" />
     <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
@@ -806,6 +815,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807260854142_SomeBuildingModelChanges.resx">
       <DependentUpon>201807260854142_SomeBuildingModelChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808101031394_AddingBillUrlInApartment.resx">
+      <DependentUpon>201808101031394_AddingBillUrlInApartment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -38,7 +38,8 @@ namespace Sustan.Models
         [Display(Name = "Etažnina")]
         public decimal CostOfService { get; set; }
 
-
+        [MaxLength(1024)]
+        public string ApartmentBillUrl { get; set; }
 
         [Required(ErrorMessage = "Molim Vas izberite zgradu!")]
         [Display(Name = "JIBZ")]

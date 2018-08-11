@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                @using (Html.BeginForm("Create", "Apartments", FormMethod.Post, new { @id = "createForm" }))
+                @using (Html.BeginForm("Create", "Apartments", FormMethod.Post, new { @id = "createForm", enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
 
@@ -75,6 +75,14 @@
                         </div>
 
                         <div class="form-group">
+                            @Html.LabelFor(model => model.ApartmentBillUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <input class="control-label" type="file" id="Document" name="upload" />
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <input type="submit" value="Dodaj" class="btn btn-primary" />
                             </div>
@@ -106,6 +114,11 @@
                 }, "Pogrešan format zapisa!"
             );
 
+            $.validator.addMethod('filesize', function (value, element, param) {
+                return this.optional(element) || (element.files[0].size <= param)
+            }, 'File size must be less than {0}');
+
+
             $("#createForm").validate({
                 errorClass: 'text-danger animation-slideDown',
 
@@ -135,6 +148,10 @@
                         required: true,
                         //regex: /\d+(\.\d{1,2})?/,
                         number: true
+                    },
+                    upload: {
+                        filesize: 5000000,
+                        extension: 'pdf'
                     }
                 },
                 messages: {
@@ -161,6 +178,10 @@
                     'CostOfService': {
                         required: "Molim Vas unesite etažninu!",
                         //regex: "Etažnina mora biti broj sa dve decimale iza tačke."
+                    },
+                    upload: {
+                        filesize: "Veličina fajla ne može biti veća od 5MB.",
+                        extension: "Podrzan format fajla je PDF."
                     }
                 }
 
