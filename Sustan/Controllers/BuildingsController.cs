@@ -48,6 +48,7 @@ namespace Sustan.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Building building = _repository.GetById(id);
+                        
             if (building == null)
             {
                 return HttpNotFound();
@@ -68,15 +69,71 @@ namespace Sustan.Controllers
         [Route("Kreiranje")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,JIBZ,Street,Number,Entrance,NumberOfFloors,Pib,BuildingRegistrationNumber,AccountNumber,AccountBalance,ParcelNumber,BuildingArea,BuildingManager,ImageUrl")] Building building, HttpPostedFileBase upload)
+        public ActionResult Create([Bind(Include = "Id,JIBZ,Street,Number,Entrance,NumberOfFloors,Pib,BuildingRegistrationNumber,AccountNumber,AccountBalance,ParcelNumber,BuildingArea,BuildingManager,ImageUrl")] Building building, HttpPostedFileBase uploadImage, HttpPostedFileBase[] uploadPdf)
         {
+            if (building == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // Sve zgrade u bazi
+            var existingBuilding = _repository.GetAll();
+
             if (ModelState.IsValid)
             {
-                if (upload != null && upload.ContentLength > 0)
+                //Provera da li postoji JIBZ zgrade u bazi
+                foreach (var item in existingBuilding)
                 {
-                    var path = Path.Combine(Server.MapPath("~/Uploads/Images/"), Path.GetFileName(upload.FileName));
-                    upload.SaveAs(path);
-                    building.ImageUrl = "~/Uploads/Images/" + upload.FileName;
+                    if (item.JIBZ == building.JIBZ)
+                    {
+                        ViewBag.Error = "JIBZ zgrade već postoji u bazi.";
+
+                        return View(building);
+                    }
+                }
+
+                if (uploadImage != null && uploadImage.ContentLength > 0)
+                {
+                    var path = Path.Combine(Server.MapPath("~/Uploads/Images/"), Path.GetFileName(uploadImage.FileName));
+
+                    if (System.IO.File.Exists(path))
+                    {
+                        ViewBag.ErrorMessage = "Fajl sa istim imenom već postoji u bazi!";
+                        return View(building);
+                    }
+                    else
+                    {
+                        uploadImage.SaveAs(path);
+                        building.ImageUrl = "~/Uploads/Images/" + uploadImage.FileName;
+                    }
+                    
+                }
+
+                building.PdfFilePaths = new List<PdfFilePath>();
+
+                foreach (HttpPostedFileBase item in uploadPdf)
+                {
+                    if (item != null && item.ContentLength > 0)
+                    {
+                        var pdfFile = new PdfFilePath
+                        {
+                            PdfFileName = Path.GetFileName(item.FileName),
+                            PdfFileUrl = Path.Combine(Server.MapPath("~/Uploads/Documents/"), Path.GetFileName(item.FileName))
+                        };
+
+                        if (System.IO.File.Exists(pdfFile.PdfFileUrl))
+                        {
+                            ViewBag.ErrorMessage = "Fajl sa istim imenom već postoji u bazi!";
+                            return View(building);
+                        }
+                        else
+                        {
+                            item.SaveAs(pdfFile.PdfFileUrl);
+                            pdfFile.PdfFileUrl = "~/Uploads/Documents/" + item.FileName;
+
+                            building.PdfFilePaths.Add(pdfFile);
+                        }
+                    }
                 }
 
                 _repository.Create(building);
@@ -108,7 +165,7 @@ namespace Sustan.Controllers
         [Route("Izmena/{id?}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,JIBZ,Street,Number,Entrance,NumberOfFloors,Pib,BuildingRegistrationNumber,AccountNumber,AccountBalance,ParcelNumber,BuildingArea,BuildingManager,ImageUrl")] Building building, int id, HttpPostedFileBase upload)
+        public ActionResult Edit([Bind(Include = "Id,JIBZ,Street,Number,Entrance,NumberOfFloors,Pib,BuildingRegistrationNumber,AccountNumber,AccountBalance,ParcelNumber,BuildingArea,BuildingManager,ImageUrl")] Building building, int id, HttpPostedFileBase uploadImage)
         {
             if (id != building.Id)
             {
@@ -118,17 +175,27 @@ namespace Sustan.Controllers
             if (ModelState.IsValid)
             {
                 var model = _repository.GetById(building.Id);
-                var oldFilePath = model.ImageUrl;
+                var oldImagePath = model.ImageUrl;
 
-                if (upload != null && upload.ContentLength > 0)
+                if (uploadImage != null && uploadImage.ContentLength > 0)
                 {
-                    var path = Path.Combine(Server.MapPath("~/Uploads/Images/"), Path.GetFileName(upload.FileName));
-                    upload.SaveAs(path);
-                    model.ImageUrl = "~/Uploads/Images/" + upload.FileName;
-                    string fullPath = Request.MapPath(oldFilePath);
-                    if (System.IO.File.Exists(fullPath))
+                    var path = Path.Combine(Server.MapPath("~/Uploads/Images/"), Path.GetFileName(uploadImage.FileName));
+
+                    if (System.IO.File.Exists(path))
                     {
-                        System.IO.File.Delete(fullPath);
+                        ViewBag.ErrorMessage = "Fajl sa istim imenom već postoji u bazi!";
+                        return View(building);
+                    }
+                    else
+                    {
+                        uploadImage.SaveAs(path);
+
+                        model.ImageUrl = "~/Uploads/Images/" + uploadImage.FileName;
+                        string fullPath = Request.MapPath(oldImagePath);
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            System.IO.File.Delete(fullPath);
+                        }
                     }
                 }
 
@@ -163,11 +230,14 @@ namespace Sustan.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Building building = _repository.GetById(id);
+
             if (building == null)
             {
                 return HttpNotFound();
             }
+
             return View(building);
         }
 
@@ -184,36 +254,37 @@ namespace Sustan.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
+                Building building = _repository.GetById(id);
 
+                var apartments = _repository.GetApartments();
+                foreach (var apartment in apartments)
+                {
+                    if (apartment.BuildingId == building.Id)
+                    {
+                        ViewBag.MessageTitle = "Nije moguće obrisati zgradu!";
+                        ViewBag.Message = "Prvo morate obrisati sve stanove koji pripadaju zgradi.";
+                        return View(building);
+                    }
+                }
+
+                //Deleting image file from server
+                string fullPath = Request.MapPath(building.ImageUrl);
+
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+
+                _repository.Delete(building);
             }
             catch (Exception)
             {
-
                 throw;
             }
 
-            Building building = _repository.GetById(id);
-
-            var apartments = _repository.GetApartments();
-            foreach (var apartment in apartments)
-            {
-                if (apartment.BuildingId == building.Id)
-                {
-                    ViewBag.MessageTitle = "Nije moguće obrisati zgradu!";
-                    ViewBag.Message = "Prvo morate obrisati sve stanove koji pripadaju zgradi.";
-                    return View(building);
-                }
-            }
-
-            string fullPath = Request.MapPath(building.ImageUrl);
-            if (System.IO.File.Exists(fullPath))
-            {
-                System.IO.File.Delete(fullPath);
-            }
-
-            _repository.Delete(building);
+            
             return RedirectToAction("Index");
         }
-
+      
     }
 }

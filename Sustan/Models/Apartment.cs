@@ -39,6 +39,7 @@ namespace Sustan.Models
         public decimal CostOfService { get; set; }
 
         [MaxLength(1024)]
+        [Display(Name = "Račun PDF")]
         public string ApartmentBillUrl { get; set; }
 
         [Required(ErrorMessage = "Molim Vas izberite zgradu!")]

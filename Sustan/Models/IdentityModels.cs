@@ -36,6 +36,7 @@ namespace Sustan.Models
         public DbSet<Apartment> Apartments { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<PdfFilePath> PdfFilePaths { get; set; }
 
         public static ApplicationDbContext Create()
         {

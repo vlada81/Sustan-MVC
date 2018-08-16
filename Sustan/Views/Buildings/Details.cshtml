@@ -124,6 +124,15 @@
                     {
                         <img class="img-thumbnail" src="@Url.Content(Model.ImageUrl)" width="450" />
                     }
+                    @if (Model.PdfFilePaths != null)
+                    {
+                        foreach (var item in Model.PdfFilePaths)
+                        {
+                        <div class="col-md-10 col-xs-10 margin-bottom-10">
+                            <a target="_blank" href="@Url.Content(item.PdfFileUrl)"><i class="fa fa-download"></i> @Url.Content(item.PdfFileName)</a>
+                        </div>
+                        }
+                    }
                 </div>
             </div>
             <div class="col-sm-12">

@@ -83,7 +83,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <h2>Dokumentacija za preuzimanje</h2>
-                <div class="col-md-6">
+                <div class="col-md-8 margin-bottom-30 clearfix">
                     @{
                         var month = DateTime.Today.ToLongDateString();
                         string[] m = month.Split(' ');
@@ -94,7 +94,7 @@
 
                     @foreach (var item in Model.Apartments)
                     {
-                        <div class="col-sm-6">
+                        <div class="col-sm-6 margin-bottom-10">
                             @if (item.Building.Apartments.Count() != 1)
                             {
                                 break;
@@ -104,7 +104,7 @@
 
                                 <h6>Zgrada: @Html.DisplayFor(modelItem => item.Building.Street) @Html.DisplayFor(modelItem => item.Building.Number)</h6>
                                 <h6>Stan: @Html.DisplayFor(modelItem => item.ApartmentNumber) </h6>
-                                <br />
+
                                 if (item.ApartmentBillUrl != null)
                                 {
                                     <a class="btn btn-default" target="_blank" href="@Url.Content(item.ApartmentBillUrl)"><i class="fa fa-download"></i> Račun - preuzimanje</a>
@@ -113,9 +113,37 @@
                         </div>
                     }
                 </div>
-                <div class="col-md-6">
+                @*<div class="col-md-4">
                     <h3>Ostali dokumenti:</h3>
-                </div>
+                    <br />
+                    @foreach (var item in Model.PdfFilePaths)
+                    {
+                        <div class="col-sm-6 margin-bottom-10">
+                            @if (item.BuildingId != 1)
+                            {
+                                break;
+                            }
+                            else
+                            {
+
+                                <h6>Zgrada: @Html.DisplayFor(modelItem => item.Building.Street) @Html.DisplayFor(modelItem => item.Building.Number)</h6>
+
+                                if (Model.PdfFilePaths != null)
+                                {
+                                    foreach (var file in Model.PdfFilePaths)
+                                    {
+                                        <a class="btn btn-default" target="_blank" href="@Url.Content(file.PdfFileUrl)"><i class="fa fa-download"></i> @Url.Content(file.PdfFileName)</a>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <p>Greska</p>
+                                }
+                            }
+                        </div>
+                    }
+                </div>*@
             </div>
         </div>
     </div>

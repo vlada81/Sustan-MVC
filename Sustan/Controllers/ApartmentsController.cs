@@ -94,21 +94,24 @@ namespace Sustan.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            //Problem postoji kada se kreira novi stan koji ne postoji u bazi jer vraca null vrednost zbog FirstOrDefault()
-            //var apartmentNumberInUse = _repository.GetAll().Where(c => c.JIBS == apartment.JIBS);
-
-            //if (apartmentNumberInUse.Last().JIBS == apartment.JIBS)
-            //{
-            //    ViewBag.Error = "Broj stana te zgrade već postoji u bazi.";
-
-            //    ViewBag.BuildingId = new SelectList(_repository.GetBuildings(), "Id", "JIBZ", apartment.BuildingId);
-            //    ViewBag.UserId = new SelectList(_repository.GetUsers(), "Id", "Email", apartment.UserId);
-
-            //    return View(apartment);
-            //}
+            // Svi stanovi u bazi
+            var existingApartmetnts = _repository.GetAll();
 
             if (ModelState.IsValid)
             {
+                //Provera da li JIBS ili broj stana zgrade vec postoji u bazi
+                foreach (var item in existingApartmetnts)
+                {
+                    if (item.JIBS == apartment.JIBS || item.ApartmentNumber == apartment.ApartmentNumber)
+                    {
+                        ViewBag.Error = "Broj stana te zgrade već postoji u bazi.";
+                        ViewBag.BuildingId = new SelectList(_repository.GetBuildings(), "Id", "JIBZ", apartment.BuildingId);
+                        ViewBag.UserId = new SelectList(_repository.GetUsers(), "Id", "Email", apartment.UserId);
+
+                        return View(apartment);
+                    }
+                }
+
                 if (upload != null && upload.ContentLength > 0)
                 {
                     var path = Path.Combine(Server.MapPath("~/Uploads/Documents/"), Path.GetFileName(upload.FileName));
@@ -168,7 +171,7 @@ namespace Sustan.Controllers
                 {
                     var path = Path.Combine(Server.MapPath("~/Uploads/Documents/"), Path.GetFileName(upload.FileName));
                     upload.SaveAs(path);
-                    model.ApartmentBillUrl   = "~/Uploads/Documents/" + upload.FileName;
+                    model.ApartmentBillUrl = "~/Uploads/Documents/" + upload.FileName;
                     string fullPath = Request.MapPath(oldFilePath);
                     if (System.IO.File.Exists(fullPath))
                     {
@@ -225,17 +228,31 @@ namespace Sustan.Controllers
         [Route("Brisanje/{id?}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
-            Apartment apartment = _repository.GetById(id);
-
-            string fullPath = Request.MapPath(apartment.ApartmentBillUrl);
-            if (System.IO.File.Exists(fullPath))
+            try
             {
-                System.IO.File.Delete(fullPath);
-            }
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
 
-            _repository.Delete(apartment);
+                Apartment apartment = _repository.GetById(id);
+
+                string fullPath = Request.MapPath(apartment.ApartmentBillUrl);
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+
+                _repository.Delete(apartment);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
             return RedirectToAction("Index");
         }
 

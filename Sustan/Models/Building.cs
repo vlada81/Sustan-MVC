@@ -77,5 +77,7 @@ namespace Sustan.Models
         public string ImageUrl { get; set; }
 
         public ICollection<Apartment> Apartments { get; set; }
+
+        public ICollection<PdfFilePath> PdfFilePaths { get; set; }
     }
 }

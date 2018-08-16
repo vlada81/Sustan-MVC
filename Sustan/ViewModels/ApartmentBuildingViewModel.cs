@@ -10,5 +10,6 @@ namespace Sustan.ViewModels
     {
         public IEnumerable<Apartment> Apartments { get; set; }
         public Apartment Apartment { get; set; }
+       
     }
 }

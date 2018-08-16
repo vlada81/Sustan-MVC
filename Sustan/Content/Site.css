@@ -48,6 +48,9 @@ textarea {
         font-size: 15px;
         padding-left: 20px
     }
+    .dataTables_length select, input[type="search"] {
+        margin-bottom: 10px;
+    }
 }
 
 .container-fluid {
@@ -86,6 +89,13 @@ textarea {
 
 .dataTables_length select, input[type="search"] {
     margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+
+    .dataTables_length select, input[type="search"] {
+        margin-bottom: 10px;
+    }
 }
 
 .flat-row {
@@ -205,6 +215,18 @@ p {
     margin-left: 20px;
 }
 
+.margin-top-30 {
+    margin-top: 30px;
+}
+
 .margin-top-50 {
     margin-top: 50px;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+.margin-bottom-30 {
+    margin-bottom: 30px;
 }

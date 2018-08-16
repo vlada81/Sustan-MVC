@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using Sustan.ViewModels;
 
 namespace Sustan.Repository
 {
@@ -19,12 +20,12 @@ namespace Sustan.Repository
 
         public IQueryable<Building> GetAll()
         {
-            return db.Buildings;
+            return db.Buildings.Include(b => b.PdfFilePaths);
         }
 
         public Building GetById(int? id)
         {
-            return db.Buildings.SingleOrDefault(b => b.Id == id);
+            return db.Buildings.Include(b => b.PdfFilePaths).SingleOrDefault(b => b.Id == id);
         }
 
         public void Create(Building building)
