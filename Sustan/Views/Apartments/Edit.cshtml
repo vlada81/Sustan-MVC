@@ -72,7 +72,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.UserId, "Korisnik", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownList("UserId", null, "- Izaberite korisnika -", htmlAttributes: new { @class = "form-control", autocomplete = "UserId" })
+                                @Html.DropDownList("UserId", null, "- Izaberite korisnika -", htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                             <div class="col-md-10">
                                 @if (Model.ApartmentBillUrl != null)
                                 {
-                                    <label class="control-label">@Url.Content(Model.ApartmentBillUrl)</label>
+                                    @Html.EditorFor(model => model.ApartmentBillUrl, new { htmlAttributes = new { @class = "form-control", autocomplete = "ApartmentBillUrl", @readonly = "readonly" } })
                                 }
                             </div>
                         </div>

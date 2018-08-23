@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Sustan.Models;
+using Sustan.ViewModels;
 
 namespace Sustan.Repository.Interfaces
 {
@@ -18,6 +19,5 @@ namespace Sustan.Repository.Interfaces
         bool Exist(int? id);
 
         IQueryable<Building> GetBuildings();
-
     }
 }

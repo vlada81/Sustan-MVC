@@ -1,4 +1,5 @@
-﻿using Sustan.Models;
+﻿using Microsoft.AspNet.Identity;
+using Sustan.Models;
 using Sustan.Repository;
 using Sustan.Repository.Interfaces;
 using System;
@@ -38,7 +39,6 @@ namespace Sustan.Controllers
             return View(filePaths.ToList());
         }
 
-
         // GET: PdfFilePaths/Create
         [Authorize(Roles = "Admin")]
         [Route("Dodavanje")]
@@ -64,7 +64,7 @@ namespace Sustan.Controllers
 
             if (ModelState.IsValid)
             {
-
+                // Dodavanje pdf fajlova dokumentacije za zgradu
                 foreach (HttpPostedFileBase item in uploadPdfs)
                 {
                     if (item != null && item.ContentLength > 0)
@@ -72,6 +72,7 @@ namespace Sustan.Controllers
                         filePath.PdfFileName = Path.GetFileName(item.FileName);
                         filePath.PdfFileUrl = Path.Combine(Server.MapPath("~/Uploads/Documents/"), Path.GetFileName(item.FileName));
 
+                        // Proverava da li fajl sa istim imenom vec postoji u bazi
                         if (System.IO.File.Exists(filePath.PdfFileUrl))
                         {
                             ViewBag.Error = "Fajl sa istim imenom već postoji u bazi!";
@@ -126,9 +127,8 @@ namespace Sustan.Controllers
 
                 PdfFilePath filePath = _repository.GetById(id);
 
-                //Deleting pdf file from server
+                // Brisanje pdf fajla dokumentacije sa servera
                 string fullPath = Request.MapPath(filePath.PdfFileUrl);
-
                 if (System.IO.File.Exists(fullPath))
                 {
                     System.IO.File.Delete(fullPath);

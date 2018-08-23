@@ -6,10 +6,10 @@ using System.Web;
 
 namespace Sustan.ViewModels
 {
-    public class ApartmentBuildingViewModel
+    public class ApartmentBuildingPdfFileViewModel
     {
         public IEnumerable<Apartment> Apartments { get; set; }
         public Apartment Apartment { get; set; }
-       
+        public IEnumerable<PdfFilePath> PdfFilePaths { get; set; }
     }
 }

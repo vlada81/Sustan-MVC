@@ -64,17 +64,21 @@
                     </dl>
 
                     <br />
-                    <div>
-                        @Html.ActionLink("Izmeni", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-default" })
-                    </div>
+                   
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 margin-bottom-30 clearfix">
                     @if (Model.ApartmentBillUrl != null)
                     {
-                        <a class="btn btn-default" target="_blank" href="@Url.Content(Model.ApartmentBillUrl)">Poslednji račun</a><br />
-                        <lable>@Url.Content(Model.ApartmentBillUrl)</lable>
+                        <a class="btn btn-default margin-bottom-10" target="_blank" href="@Url.Content(Model.ApartmentBillUrl)">Poslednji račun</a><br />
+                        string[] temp = Model.ApartmentBillUrl.Split('/');
+                        string fileName = temp[3];
+
+                        <lable>@Url.Content(fileName)</lable>
                     }
+                </div>
+                <div class="col-sm-12">
+                    @Html.ActionLink("Izmeni", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Nazad", "Index", null, new { @class = "btn btn-default" })
                 </div>
             </div>
         </div>

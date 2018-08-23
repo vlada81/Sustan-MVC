@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Threading.Tasks;
+using Sustan.ViewModels;
 
 namespace Sustan.Repository
 {
@@ -79,5 +80,6 @@ namespace Sustan.Repository
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
     }
 }

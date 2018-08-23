@@ -90,8 +90,7 @@ tpj(document).ready(function() {
                 type:"mouse",
                 origo:"slidercenter",
                 speed:2000,
-                levels:[2,3,4,5,6,7,12,16,10,50,46,47,48,49,50,55],
-                type:"mouse",
+                levels:[2,3,4,5,6,7,12,16,10,50,46,47,48,49,50,55]
             },
             shadow:0,
             spinner:"off",

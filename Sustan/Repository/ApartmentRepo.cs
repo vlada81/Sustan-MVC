@@ -31,13 +31,16 @@ namespace Sustan.Repository
             return db.Apartments.Include(a => a.Building).SingleOrDefault(a => a.Id == id);
         }
 
-        public ApartmentBuildingViewModel GetViewModel(string id)
+        public ApartmentBuildingPdfFileViewModel GetViewModel(string id)
         {
-            ApartmentBuildingViewModel apartment = new ApartmentBuildingViewModel();
-            apartment.Apartments = db.Apartments.Include(u => u.User).Where(a => a.UserId == id).Include(a => a.Building);
+            ApartmentBuildingPdfFileViewModel apartment = new ApartmentBuildingPdfFileViewModel();
+
+            apartment.Apartments = db.Apartments.Include(u => u.User).Where(a => a.UserId == id).Include(b => b.Building);
+            apartment.PdfFilePaths = db.PdfFilePaths;
 
             return apartment;
         }
+
 
         public void Create(Apartment apartment)
         {
@@ -86,7 +89,7 @@ namespace Sustan.Repository
 
         public IQueryable<Building> GetBuildings()
         {
-            return db.Buildings;
+            return db.Buildings.Include(p => p.PdfFilePaths);
         }
 
         public IQueryable<ApplicationUser> GetUsers()

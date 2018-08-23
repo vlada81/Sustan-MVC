@@ -1,7 +1,7 @@
 var tpj=jQuery;            
 var revapi1078;
 tpj(document).ready(function() {
-    if(tpj("#rev_slider_1078_1").revolution == undefined){
+    if(tpj("#rev_slider_1078_1").revolution === undefined){
         revslider_showDoubleJqueryError("#rev_slider_1078_1");
     }else{
         revapi1078 = tpj("#rev_slider_1078_1").show().revolution({
@@ -90,8 +90,7 @@ tpj(document).ready(function() {
                 type:"mouse",
                 origo:"slidercenter",
                 speed:2000,
-                levels:[2,3,4,5,6,7,12,16,10,50,46,47,48,49,50,55],
-                type:"mouse",
+                levels:[2,3,4,5,6,7,12,16,10,50,46,47,48,49,50,55]
             },
             shadow:0,
             spinner:"off",

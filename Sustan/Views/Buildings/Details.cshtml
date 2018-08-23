@@ -12,7 +12,7 @@
             <div class="col-sm-12">
                 <h4>Zgrada @Html.DisplayFor(model => model.JIBZ)</h4>
                 <hr />
-                <div class="col-md-6">
+                <div class="col-md-6 margin-bottom-30">
                     <dl class="dl-horizontal">
                         <dt>
                             @Html.DisplayNameFor(model => model.JIBZ)
@@ -119,10 +119,10 @@
                         </dd>
                     </dl>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 clearfix">
                     @if (Model.ImageUrl != null)
                     {
-                        <img class="img-thumbnail" src="@Url.Content(Model.ImageUrl)" width="450" />
+                        <img class="img-thumbnail margin-bottom-30" src="@Url.Content(Model.ImageUrl)" width="450" />
                     }
                     @if (Model.PdfFilePaths != null)
                     {

@@ -46,11 +46,15 @@ namespace Sustan.Controllers
         [Route("Podaci")]
         public ActionResult List()
         {
+            // Vraca Id trenutno logovanog korisnika
             var currentUser = User.Identity.GetUserId();
+
+            // Stan/ovi trenutno logovanog korisnika zajedno sa podacima zgrade i
+            // ostala dokumentacija zgrade i stana
             var apartment = _repository.GetViewModel(currentUser);
+
             return View(apartment);
         }
-
 
         // GET: Apartments/Details/5
         [Authorize(Roles = "Admin")]
@@ -102,7 +106,7 @@ namespace Sustan.Controllers
                 //Provera da li JIBS ili broj stana zgrade vec postoji u bazi
                 foreach (var item in existingApartmetnts)
                 {
-                    if (item.JIBS == apartment.JIBS || item.ApartmentNumber == apartment.ApartmentNumber)
+                    if (item.JIBS == apartment.JIBS && item.ApartmentNumber == apartment.ApartmentNumber)
                     {
                         ViewBag.Error = "Broj stana te zgrade već postoji u bazi.";
                         ViewBag.BuildingId = new SelectList(_repository.GetBuildings(), "Id", "JIBZ", apartment.BuildingId);
@@ -112,11 +116,24 @@ namespace Sustan.Controllers
                     }
                 }
 
+                // Dodavanje pdf racuna prilikom kreiranja stana
                 if (upload != null && upload.ContentLength > 0)
                 {
-                    var path = Path.Combine(Server.MapPath("~/Uploads/Documents/"), Path.GetFileName(upload.FileName));
-                    upload.SaveAs(path);
-                    apartment.ApartmentBillUrl = "~/Uploads/Documents/" + upload.FileName;
+                    var path = Path.Combine(Server.MapPath("~/Uploads/Bills/"), Path.GetFileName(upload.FileName));
+
+                    // Proverava da li racun sa istim imenom vec postoji u bazi
+                    if (System.IO.File.Exists(path))
+                    {
+                        ViewBag.Error = "Račun sa istim imenom već postoji u bazi!";
+                        ViewBag.BuildingId = new SelectList(_repository.GetBuildings(), "Id", "JIBZ", apartment.BuildingId);
+                        ViewBag.UserId = new SelectList(_repository.GetUsers(), "Id", "Email", apartment.UserId);
+                        return View(apartment);
+                    }
+                    else
+                    {
+                        upload.SaveAs(path);
+                        apartment.ApartmentBillUrl = "~/Uploads/Bills/" + upload.FileName;
+                    }
                 }
 
                 _repository.Create(apartment);
@@ -155,7 +172,7 @@ namespace Sustan.Controllers
         [Route("Izmena/{id?}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,JIBS,ApartmentNumber,ApartmentArea,NumberOfTenants,CostOfService,BuildingId,UserId,ApartmentBillUrl")] Apartment apartment, int id, HttpPostedFileBase upload)
+        public ActionResult Edit([Bind(Include = "Id,JIBS,ApartmentNumber,ApartmentArea,NumberOfTenants,CostOfService,ApartmentBillUrl,BuildingId,UserId")] Apartment apartment, int id, HttpPostedFileBase upload)
         {
             if (id != apartment.Id)
             {
@@ -164,22 +181,36 @@ namespace Sustan.Controllers
 
             if (ModelState.IsValid)
             {
-                var model = _repository.GetById(id);
-                var oldFilePath = model.ApartmentBillUrl;
+                var oldFilePath = apartment.ApartmentBillUrl;
 
+                // Izmena racuna stana
                 if (upload != null && upload.ContentLength > 0)
                 {
-                    var path = Path.Combine(Server.MapPath("~/Uploads/Documents/"), Path.GetFileName(upload.FileName));
-                    upload.SaveAs(path);
-                    model.ApartmentBillUrl = "~/Uploads/Documents/" + upload.FileName;
-                    string fullPath = Request.MapPath(oldFilePath);
-                    if (System.IO.File.Exists(fullPath))
+                    var path = Path.Combine(Server.MapPath("~/Uploads/Bills/"), Path.GetFileName(upload.FileName));
+
+                    // Proverava da li racun sa istim imenom vec postoji u bazi
+                    if (System.IO.File.Exists(path))
                     {
-                        System.IO.File.Delete(fullPath);
+                        ViewBag.Error = "Račun sa istim imenom već postoji u bazi!";
+                        ViewBag.BuildingId = new SelectList(_repository.GetBuildings(), "Id", "JIBZ", apartment.BuildingId);
+                        ViewBag.UserId = new SelectList(_repository.GetUsers(), "Id", "Email", apartment.UserId);
+                        return View(apartment);
+                    }
+                    else
+                    {
+                        upload.SaveAs(path);
+                        apartment.ApartmentBillUrl = "~/Uploads/Bills/" + upload.FileName;
+                        string fullPath = Request.MapPath(oldFilePath);
+                        
+                        // Brisanje starog racuna nakon dodavanja novog
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            System.IO.File.Delete(fullPath);
+                        }
                     }
                 }
 
-                _repository.Update(model);
+                _repository.Update(apartment);
 
                 try
                 {
@@ -239,6 +270,7 @@ namespace Sustan.Controllers
 
                 Apartment apartment = _repository.GetById(id);
 
+                // Brisanje poslednjeg racuna - pdf
                 string fullPath = Request.MapPath(apartment.ApartmentBillUrl);
                 if (System.IO.File.Exists(fullPath))
                 {
@@ -252,7 +284,7 @@ namespace Sustan.Controllers
 
                 throw;
             }
-            
+
             return RedirectToAction("Index");
         }
 

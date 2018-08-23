@@ -21,6 +21,6 @@ namespace Sustan.Repository.Interfaces
         IQueryable<Building> GetBuildings();
         IQueryable<ApplicationUser> GetUsers();
 
-        ApartmentBuildingViewModel GetViewModel(string id);
+        ApartmentBuildingPdfFileViewModel GetViewModel(string id);
     }
 }

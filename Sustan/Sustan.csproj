@@ -278,7 +278,7 @@
     <Compile Include="Repository\Interfaces\IPdfFilePathRepository.cs" />
     <Compile Include="Repository\PdfFilePathRepo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\ApartmentBuildingViewModel.cs" />
+    <Compile Include="ViewModels\ApartmentBuildingPdfFileViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -793,6 +793,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\Bills\" />
     <Folder Include="Uploads\Documents\" />
     <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
